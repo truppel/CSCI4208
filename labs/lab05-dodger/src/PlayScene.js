@@ -16,10 +16,15 @@ class PlayScene extends Phaser.Scene {
     }
     update() {
         this.update_player();
+        this.update_background();
     }
     
     create_map() {
-        this.add.image(640/2, 480/2, "background");
+        // this.add.image(640/2, 480/2, "background");
+        this.background = this.add.tileSprite(640/2, 480/2, 640, 480, "background");
+    }
+    update_background() {
+        this.background.tilePositionX += 3;
     }
     create_player() {
         this.player = new Player(this);
