@@ -7,9 +7,12 @@ class PlayScene extends Phaser.Scene {
         this.load.image("background", "background.png");
         this.load.image("player", "player.png");
         this.load.image("enemy", "enemy.png");
+        this.load.image("player-0", "player-0.png");
+        this.load.image("player-1", "player-1.png");
     }
     create() {
         this.create_map();
+        this.create_animations();
         this.create_player();
         this.create_enemies();
         this.create_collisions();
@@ -56,6 +59,26 @@ class PlayScene extends Phaser.Scene {
     create_collisions() {
         this.physics.add.overlap(this.player, this.enemies, this.game_over,null,this);
     }   
+    create_animations() {
+        if (!this.anims.exists("player-move")) {
+            const anim_player_move = new Object();
+            anim_player_move.key = "player-move";
+            anim_player_move.frames = [{key: "player-0"}, {key: "player-1"}];
+            anim_player_move.frameRate = 6;
+            anim_player_move.repeat = -1;
+            this.anims.create(anim_player_move);
+        }
+        this.anims.create({
+            key: "player-idle",
+            frames: this.anims.generateFrameNames("player-0"),
+            repeat: -1
+        });
+        this.anims.create({
+            key: "player-move",
+            frames: this.anims.generateFrameNames("player-1"),
+            repeat: -1
+        });
+    }
     game_over() {
         this.cameras.main.flash();
         this.scene.restart();

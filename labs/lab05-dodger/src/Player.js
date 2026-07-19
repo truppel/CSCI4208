@@ -13,6 +13,7 @@ class Player extends Phaser.GameObjects.Sprite {
             left: Phaser.Input.Keyboard.KeyCodes.A,
             right: Phaser.Input.Keyboard.KeyCodes.D
         });
+        this.anims.play("player-move",true);
     }
     move() {
         this.body.velocity.x = 0;
