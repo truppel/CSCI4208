@@ -1,8 +1,7 @@
 <html>
     <head></head>
     <body>
-        <h1>Inventory</h1>
-        <p>Here is your inventory:</p>
+        Inventory: <hr>
         <table>
             <tr>
                 <th> &#128176; </th> <!-- emoji: 💰 -->
@@ -11,17 +10,18 @@
                 <th> &#128273; </th> <!-- emoji: 🔑 -->
             </tr>
             <tr>
-                <th>Quantity</th>
-            </tr>
-            <tr>
                 <td id='gp'>0</td>
                 <td id='hp'>0</td>
                 <td id='ap'>0</td>
                 <td id='keys'>0</td>
-                <td>Gold Coins</td>
             </tr>
         </table>
         <script>
+            var queryString = new URLSearchParams(location.search);
+            gp.innerText = queryString.get("gp");
+            hp.innerText = queryString.get("hp");
+            ap.innerText = queryString.get("ap");
+            keys.innerText = queryString.get("keys");
         </script>            
         
 
