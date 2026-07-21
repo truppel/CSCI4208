@@ -3,6 +3,29 @@
 A local-first React single-page application for exploring concert setlist trends,
 song frequency, repertoire concentration, venues, and original-music goals.
 
+## Screenshots
+
+### Dashboard overview
+
+The main dashboard combines live dataset status, filters, summary metrics, and
+performance charts. Filters recalculate the visible analytics immediately.
+
+![Live Repertoire Explorer dashboard with dataset status, filters, and summary metrics](docs/screenshots/dashboard-overview.png)
+
+### Original-music goal
+
+The originals view compares originals, covers, and unknown classifications and
+shows progress toward an adjustable original-performance target.
+
+![Originals dashboard showing goal progress and performance classification mix](docs/screenshots/originals-dashboard.png)
+
+### Repertoire health
+
+The song catalog ranks material by play count and identifies songs that have
+fallen outside the recent rotation.
+
+![Song catalog showing repertoire play counts](docs/screenshots/song-catalog.png)
+
 ## Run the project
 
 ```powershell
@@ -19,11 +42,13 @@ Run the automated unit and service tests once with `npm test`, or keep them
 running while you edit with `npm run test:watch`.
 
 The class responsibilities, state flow, data-loading sequence, design choices,
-and extension points are documented in `docs/ARCHITECTURE.md`.
+and extension points are documented in
+[the architecture document](docs/ARCHITECTURE.md).
 
 ## Data source
 
-The default public GET loads `/public/data/performances.json`. Set
+The default public GET loads `public/data/performances.json` at the browser URL
+`data/performances.json`. Set
 `VITE_DATASET_URL` in a local `.env` file to use a published JSON or CSV URL.
 Every source must normalize to the fields demonstrated in the sample file.
 
