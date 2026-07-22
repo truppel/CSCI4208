@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Adventure Story</title>
+        <link rel="icon" href="assets/dragon-logo.png" />
+    </head>
+    <body>
+        <h1>Overworld</h1>
+        <p>Welcome to the overworld!</p>
+        <img src="assets/overworld-map.gif" width="480" height="360" alt="Overworld Image" />
+        <p> You are in the overworld. Where do you want to go?</p>
+        <ul>
+            <li><a id="dungeon" href="dungeon.html"> Dungeon </a></li>
+            <li><a id="forest" href="forest.html"> Forest </a></li>
+            <li><a id="shop" href="shop.html"> Shop </a></li>
+        </ul>
+        <iframe src="inventory.html" id="inventory" height="100" width="250"></iframe>
+        <script>
+            inventory.src += location.search;
+            shop.href += location.search;
+            forest.href += location.search;
+            dungeon.href += location.search;
+        </script>
+    </body> 
+</html>
