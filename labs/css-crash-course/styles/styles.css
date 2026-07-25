@@ -1,0 +1,173 @@
+/*This is the CSS for Lab 2: CSS Crash Course */
+/* Goal 1: CSS Selectors */
+/* Goal 2: CSS Colors */
+/* Goal 3: CSS Fonts */
+/* Goal 4: CSS Spacing */
+/* Goal 5: CSS Sizing */
+/* Goal 6: CSS Backgrounds */
+/* Goal 7: CSS Customizations (to Default HTML Styles) */
+/* Goal 8: CSS Aligning with Flexbox */
+/* Goal 9: CSS Aligning with Gridview */
+
+/* Goal 1: Selectors */
+body {
+background-color: l ightgray;
+}
+.class-selector{
+text-align: r ight;
+}
+#id-selector{
+text-align: c enter;
+}
+
+/*Goal 2: CSS Colors*/
+/*background colors*/
+.bg-white{
+background-color: r gb( 2 55, 2 55, 2 55) ;
+}
+.bg-green{
+background-color: r gb( 0 , 2 55, 0 ) ;
+}
+.bg-red{
+background-color: r gb( 2 55, 0 , 0 ) ;
+}
+.bg-blue{
+background-color: r gb( 0 , 0 , 2 55) ;
+}
+.bg-yellow{
+background-color: r gb( 2 55, 2 55, 0 ) ;
+}
+.bg-dark{
+background-color: r gb( 0 , 0 , 0 ) ;
+}
+/*font colors*/
+.text-red{
+color: red;
+}
+.text-blue{
+color: blue;
+}
+.text-green{
+color: green;
+}
+.text-white{
+color: white;
+}
+
+/* Goal 3: CSS Fonts */
+/* font properties */
+.bold{
+font-weight: b old;
+}
+.italic{
+font-style: i talic;
+}
+.large-text{
+font-size: 2 2px;
+}
+.small-text{
+font-size: small;
+}
+/* font families */
+.arial-font{
+font-family: ' Arial';
+}
+.bangers-font{
+font-family: ' Bangers';
+}
+
+/* Goal 4: CSS Spacing */
+.outline{
+outline-width: 3 px;
+outline-style: d ashed;
+outline-color: r ed;
+}
+.border{
+border-width: 3 px;
+border-style: s olid;
+border-color: b lue;
+}
+.padding{
+padding: 2 0px;
+}
+.margin{
+margin: 2 0px;
+}
+.container{
+width: 9 0%;
+margin: a uto;
+}
+
+/* Goal 5: CSS Sizing */
+.force-full-viewport{
+width: 1 00%;
+height: 1 00%;
+}
+.shrink-to-viewport{
+max-width: 1 00%;
+max-height: 1 00%;
+}
+
+/* Goal 6: CSS Backgrounds */
+.background-image{
+background-image: u rl( ' ../assets/bg-image.jpg') ;
+}
+.background-image-without-repeat{
+background-image: u rl( ' ../assets/bg-image.jpg') ;
+background-repeat: n o-repeat;
+background-position: c enter;
+}
+.background-image-fixed{
+background-image: url( ' ../assets/bg-image.jpg') ;
+background-attachment: fixed;
+}
+.background-gradient{
+background-image: linear-gradient( red, y ellow);
+}
+/*Goal 8: CSS Aligning with Flexbox*/
+.center{
+display: f lex;
+justify-content: center;
+}
+.left {
+display: f lex;
+justify-content: flex-start;
+}
+.right{
+display: flex;
+justify-content: flex-end;
+}
+.justify-space-between {
+display: flex;
+justify-content: space-between;
+}
+.justify-space-around{
+display: flex;
+justify-content: space-around;
+}
+.justify-space-evenly{
+display: flex;
+justify-content: s pace-evenly;
+}
+
+/* Goal 8: CSS Aligning with Gridview */
+.grid-1col{
+display: grid;
+grid-template-columns: repeat( 1 , 1 fr) ;
+grid-template-rows: auto;
+justify-items: center;
+}
+
+.grid-2col{
+display: grid;
+grid-template-columns: repeat( 2 , 1 fr) ;
+grid-template-rows: auto;
+justify-items: center;
+}
+
+.grid-3col{
+display: grid;
+grid-template-columns: repeat( 3 , 1 fr) ;
+grid-template-rows: auto;
+justify-items: center;
+}
