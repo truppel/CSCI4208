@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <link rel="icon" href="assets/favicon.png">
+        <title>Terrance Ruppel</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/bootstrap-icons.css">
+    </head>
+    <body class="bg-dark text-light">
+        <nav></nav>
+        <div class="container mt-4">
+            <ol class="carousel-inner text-center">
+                <li data-bs-target="#blog-carousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#blog-carousel" data-bs-dlide-to="1"></li>
+            </ol>
+            <h1 class="display-1">
+                <i class="bi bi-envelope"></i> Blog 
+            </h1>
+            <hr>
+            <div id="blog-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
+                <div>
+                    <div id="slide-1" class="carousel-item active">
+                        <img class="img-fluid" src="assets/bg-image.png">
+                        <div class="carousel-caption">
+                            <h5> Blog Post 1</h5>
+                            <p> Here's a little something about something.</p>
+                            <button onclick="document.location='articles/article-01.html'"> Read More </button>
+                        </div>
+                    </div>
+                    <div id="slide-2" class="carousel-item">
+                        <img class="img-fluid" src="assets/bg-image.png">
+                        <div class="carousel-caption">
+                            <h5> Blog Post 2</h5>
+                            <p> Here's some more somethings about something.</p>
+                            <button onclick="document.location='articles/article-02.html'"> Read More </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <script src="scripts/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
