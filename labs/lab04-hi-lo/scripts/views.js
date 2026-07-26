@@ -1,7 +1,8 @@
 function printAttemptsRemaining(tries)
 { 
     const attemptsText = document.getElementById("attempts"); 
-    attemptsText.innerHTML = `Number of attempts left: ${tries}`; 
+    // attemptsText.innerHTML = `Number of attempts left: ${tries}`; 
+    attemptsText.innerHTML = `<h2> Time left: ${timeLeft}</h2>`;
 } 
 
 function printClue(status, guess)
@@ -13,13 +14,15 @@ function printClue(status, guess)
     document.getElementById("digit-100s").src = `assets/${digit100}.png`;
     document.getElementById("digit-10s").src = `assets/${digit10}.png`;
     document.getElementById("digit-1s").src = `assets/${digit1}.png`;
+    then = Date.now();
 } 
 
 function printGameOver(status)
 { 
     if (status === 'WIN')
         { 
-            var message = `<h1>You Win!</h1> <p>Got it in ${10-tries} tries.</p>` ; 
+            // var message = `<h1>You Win!</h1> <p>Got it in ${10-tries} tries.</p>` ; 
+            var message = `<h1>You Win!</h1> <p>Got it in ${30-timeLeft} seconds.</p>` ; 
         } 
     else
         { 
