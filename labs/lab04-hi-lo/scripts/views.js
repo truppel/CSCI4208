@@ -9,7 +9,7 @@ function printClue(status, guess)
     // const clueText = document.getElementById("clues"); 
     // const clue = (status === 'HI') ? `<li>${guess} is too high</li>` : `<li>${guess} is too low</li>`; 
     // clueText.innerHTML += clue; 
-    const [digit100,digit10,digit1] = status=='HI' ? ['H','I','-'] : ['L','O','-'];
+    const [digit100,digit10,digit1] = (status =='HI') ? ['H','I','-'] : ['L','O','-'];
     document.getElementById("digit-100s").src = `assets/${digit100}.png`;
     document.getElementById("digit-10s").src = `assets/${digit10}.png`;
     document.getElementById("digit-1s").src = `assets/${digit1}.png`;

@@ -1,21 +1,21 @@
 initControls(); 
 
-function initControls()
-{ 
-    const button = document.getElementById("guess-button"); 
-    button.addEventListener("click", buttonEvent); 
-} 
+// function initControls()
+// { 
+//     const button = document.getElementById("guess-button"); 
+//     button.addEventListener("click", buttonEvent); 
+// } 
 
-function buttonEvent()
-{ 
-    // const number = document.getElementById("guess-text"); 
-    const hundreds = document.getElementById("digit-100s");
-    const tens = document.getElementById("digit-10s");
-    const ones = document.getElementById("digit-1s");
-    const number = "" + hundreds.value + tens.value + ones.value;
-    // guessNumber(number.value);
-    guessNumber(number);
-}
+// function buttonEvent()
+// { 
+//     // const number = document.getElementById("guess-text"); 
+//     const hundreds = document.getElementById("digit-100s");
+//     const tens = document.getElementById("digit-10s");
+//     const ones = document.getElementById("digit-1s");
+//     const number = "" + hundreds.value + tens.value + ones.value;
+//     // guessNumber(number.value);
+//     guessNumber(number);
+// }
 
 function incrementEvent(key)
 { 
@@ -57,6 +57,7 @@ function buttonEvent(){
     const hundreds = document.getElementById("digit-100s");
     const tens = document.getElementById("digit-10s");
     const ones = document.getElementById("digit-1s");
-    const number = "" + hundreds.value + tens.value + ones.value;
+    // const number = "" + hundreds.value + tens.value + ones.value;
+    const number = Number(guess.toString());
     guessNumber(number);
 }

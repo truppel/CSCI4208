@@ -22,6 +22,10 @@ function guessNumber(guess)
 
 function giveClue(guess)
 { 
+    console.log("guess:", guess);
+    console.log("typeof guess:", typeof guess);
+    console.log("passcode:", passcode);
+
     if (guess > passcode)
         { 
             printClue('HI', guess); 
