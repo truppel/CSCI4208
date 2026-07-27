@@ -26,7 +26,7 @@ export const GameOverScene = (props) => {
     const {timer,score,topScores} = props;
     renderDOM(
         `${HUD(timer,score)}
-        ${isTop5(score,topScores) ? Leadermenu : ''}
+        ${isTop5(score,topScores) ? Leadermenu() : ''}
         <h1>Game Over!</h1>
         <button onclick="start()">Start Over</button>`
     )
