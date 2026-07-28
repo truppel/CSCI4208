@@ -10,9 +10,9 @@ const pages = {
 }
 
 export default function App() {
-  // const { page } = useGame()
-  const  [page, setPage] = useState('home')
+  const { page } = useGame()
+  // const  [page, setPage] = useState('home')
   const Page = pages[page] ?? Home
-  // return <Page />
-  return <Page goTo={setPage} />
+  return <Page />
+  // return <Page goTo={setPage} />
 }

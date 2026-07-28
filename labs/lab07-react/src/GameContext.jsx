@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 
-const startingPlayer = { gp: 5, hp: 3, ap: 1, keys: 0 }
+const startingPlayer = { gp: 0, hp: 3, ap: 1, keys: 0 }
 const GameContext = createContext()
 
 export function GameProvider({ children }) {
