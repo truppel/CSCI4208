@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+
+<html lang="" xml:lang="" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="pandoc" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>Lab 01: React — Interactive Story SPA</title>
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+<link href="style.css" rel="stylesheet"/>
+<!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lab 01: React — Interactive Story SPA</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#lab-01-react" id="toc-lab-01-react">Lab 01: React</a>
+<ul>
+<li><a href="#interactive-story-spa" id="toc-interactive-story-spa">Interactive Story SPA</a></li>
+<li><a href="#table-of-contents" id="toc-table-of-contents">Table of
+Contents</a></li>
+<li><a href="#lab-introduction" id="toc-lab-introduction">Lab
+Introduction</a></li>
+<li><a href="#goal-0-compare-the-architectures" id="toc-goal-0-compare-the-architectures">Goal 0: Compare the
+Architectures</a></li>
+<li><a href="#goal-1-create-a-vite--react-project" id="toc-goal-1-create-a-vite--react-project">Goal 1: Create a Vite +
+React Project</a></li>
+<li><a href="#goal-2-render-the-home-component-with-jsx" id="toc-goal-2-render-the-home-component-with-jsx">Goal 2: Render the
+Home Component with JSX</a></li>
+<li><a href="#goal-3-create-spa-page-navigation" id="toc-goal-3-create-spa-page-navigation">Goal 3: Create SPA Page
+Navigation</a></li>
+<li><a href="#goal-4-share-inventory-with-context" id="toc-goal-4-share-inventory-with-context">Goal 4: Share Inventory
+with Context</a></li>
+<li><a href="#goal-5-reuse-components-and-props" id="toc-goal-5-reuse-components-and-props">Goal 5: Reuse Components and
+Props</a></li>
+<li><a href="#goal-6-convert-the-overworld-and-forest" id="toc-goal-6-convert-the-overworld-and-forest">Goal 6: Convert the
+Overworld and Forest</a></li>
+<li><a href="#goal-7-use-local-state-in-the-swamp" id="toc-goal-7-use-local-state-in-the-swamp">Goal 7: Use Local State in
+the Swamp</a></li>
+<li><a href="#goal-8-update-shared-state-in-the-hut" id="toc-goal-8-update-shared-state-in-the-hut">Goal 8: Update Shared
+State in the Hut</a></li>
+<li><a href="#goal-9-render-video-in-the-hut-interior" id="toc-goal-9-render-video-in-the-hut-interior">Goal 9: Render Video in
+the Hut Interior</a></li>
+<li><a href="#goal-10-update-shared-state-in-the-shoppe" id="toc-goal-10-update-shared-state-in-the-shoppe">Goal 10: Update Shared State in the Shoppe</a></li>
+<li><a href="#goal-11-combine-local-and-shared-state-in-goblin-combat" id="toc-goal-11-combine-local-and-shared-state-in-goblin-combat">Goal 11: Combine Local and Shared State in Goblin Combat</a></li>
+<li><a href="#goal-12-use-a-controlled-form-and-reach-the-dragon" id="toc-goal-12-use-a-controlled-form-and-reach-the-dragon">Goal 12: Use a Controlled Form and Reach the Dragon</a></li>
+<li><a href="#end-complete-test-and-build-the-app" id="toc-end-complete-test-and-build-the-app">End: Complete, Test, and Build the App</a></li><li><a href="#concluding-notes" id="toc-concluding-notes">Concluding
+Notes</a></li>
+<li><a href="#appendix-react-concepts" id="toc-appendix-react-concepts">Appendix: React Concepts</a></li>
+<li><a href="#appendix-html-to-jsx" id="toc-appendix-html-to-jsx">Appendix: HTML to JSX</a></li>
+<li><a href="#appendix-state-placement-guide" id="toc-appendix-state-placement-guide">Appendix: State Placement
+Guide</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="lab-01-react">Lab 01: React</h1>
+<h2 id="interactive-story-spa">Interactive Story SPA</h2>
+<p><strong>Requires:</strong> Node.js, npm, Chrome, a code editor, and
+the completed HTML Adventure Game</p>
+<p><strong>Download Starter Files:</strong>
+<a href="https://github.com/scalemailted/html-adventure-story/archive/refs/heads/master.zip">HTML Adventure Story starter files (ZIP)</a></p>
+<p>This lab refactors the multi-file HTML Adventure Game into a React
+single-page application (SPA). The story, assets, choices, inventory,
+shop, combat, and win/lose paths stay the same. The architecture
+changes: instead of loading a new HTML document and copying inventory
+values into every URL, React renders page components and keeps one
+shared player state in memory.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th style="text-align: right;">Duration</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Introduction</td>
+<td style="text-align: right;">10 minutes</td>
+<td>From a multi-page site to a React SPA</td>
+</tr>
+<tr class="even">
+<td>Goal 0</td>
+<td style="text-align: right;">5 minutes</td>
+<td>Compare the two architectures</td>
+</tr>
+<tr class="odd">
+<td>Goal 1</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Create a Vite + React project</td>
+</tr>
+<tr class="even">
+<td>Goal 2</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Render the Home component with JSX</td>
+</tr>
+<tr class="odd">
+<td>Goal 3</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Create page navigation with component state</td>
+</tr>
+<tr class="even">
+<td>Goal 4</td>
+<td style="text-align: right;">15 minutes</td>
+<td>Share inventory with Context</td>
+</tr>
+<tr class="odd">
+<td>Goal 5</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Reuse components and props</td>
+</tr>
+<tr class="even">
+<td>Goal 6</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Convert the Overworld and Forest</td>
+</tr>
+<tr class="odd">
+<td>Goal 7</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Use local state in the Swamp</td>
+</tr>
+<tr class="even">
+<td>Goal 8</td>
+<td style="text-align: right;">15 minutes</td>
+<td>Update shared state in the Hut</td>
+</tr>
+<tr class="odd">
+<td>Goal 9</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Render video in the Hut Interior</td>
+</tr>
+<tr class="even">
+<td>Goal 10</td>
+<td style="text-align: right;">15 minutes</td>
+<td>Update shared state in the Shoppe</td>
+</tr>
+<tr class="odd">
+<td>Goal 11</td>
+<td style="text-align: right;">20 minutes</td>
+<td>Combine local and shared state in Goblin combat</td>
+</tr>
+<tr class="even">
+<td>Goal 12</td>
+<td style="text-align: right;">10 minutes</td>
+<td>Use a controlled form and reach the Dragon</td>
+</tr><tr class="even"><td>End</td><td>15 minutes</td><td>Complete regression testing and build the app</td></tr>
+<tr class="odd">
+<td>Appendix</td>
+<td style="text-align: right;">n/a</td>
+<td>React concepts and HTML-to-JSX reference</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="lab-introduction">Lab Introduction</h2>
+<blockquote><p>Iterative workflow: complete one goal, save the project, run the application, and perform that goal’s Assess checks before continuing. Every page is imported and registered in the same goal that creates it. Links to not-yet-created destinations are not tested until their destination is registered.</p></blockquote>
+<div class="patch-legend"><strong>How to read the code examples:</strong> <span class="legend-chip create-chip">Create file</span> <span class="legend-chip add-chip">Add these lines</span> <span class="legend-chip review-chip">Completed reference</span></div><p class="delta-note">Every patch listing shows the complete file as it should exist after the goal. Unhighlighted lines already existed; highlighted lines are new or changed in the current goal.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Complete Lab 01: HTML first. You should recognize HTML elements,
+attributes, links, forms, media elements, JavaScript functions, event
+handlers, and query strings. No previous React experience is
+required. The pinned Vite version requires Node.js
+<code>20.19.0</code> or newer in the Node 20 line, or
+<code>22.12.0</code> or newer. Check your installation with
+<code>node --version</code> before beginning.</p>
+<blockquote>
+<p><strong>Starter project:</strong> Download and extract the
+<a href="https://github.com/scalemailted/html-adventure-story/archive/refs/heads/master.zip">HTML Adventure Story starter files</a> before beginning. Keep the original HTML files available for comparison while you refactor the application into React.</p>
+</blockquote>
+<h3 id="tooling-crash-course">Tooling Crash Course: Node.js, npm, and Vite</h3>
+<p>A React project uses browser code and development tools. The browser runs
+the finished application, while Node.js, npm, and Vite prepare and serve that
+application during development.</p>
+<table>
+<thead>
+<tr><th>Tool or file</th><th>What it is</th><th>How this lab uses it</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Node.js</strong></td>
+<td>A program that runs JavaScript outside the browser.</td>
+<td>Runs npm and Vite on your computer. The story itself still runs in the
+browser.</td>
+</tr>
+<tr>
+<td><strong>npm</strong></td>
+<td>The package manager installed with Node.js.</td>
+<td>Downloads React and Vite with <code>npm install</code> and runs named
+project commands such as <code>npm run dev</code>.</td>
+</tr>
+<tr>
+<td><code>package.json</code></td>
+<td>The project manifest: its name, dependencies, and command scripts.</td>
+<td>Tells npm which tested package versions to install and tells students
+which development and build commands are available.</td>
+</tr>
+<tr>
+<td><code>package-lock.json</code></td>
+<td>npm's exact dependency record, generated by <code>npm install</code>.</td>
+<td>Keeps installations reproducible. Commit or submit it, but do not edit it
+by hand.</td>
+</tr>
+<tr>
+<td><code>node_modules/</code></td>
+<td>The generated folder containing installed packages.</td>
+<td>Used locally by the tools. Do not edit or submit it; npm can recreate it
+from the package files.</td>
+</tr>
+<tr>
+<td><strong>Vite</strong></td>
+<td>A development server and production build tool.</td>
+<td>Serves the app over <code>http://localhost</code>, follows module
+imports, converts JSX into browser-ready JavaScript, refreshes after saves,
+and creates the deployable <code>dist/</code> folder.</td>
+</tr>
+<tr>
+<td><code>vite.config.js</code></td>
+<td>A JavaScript module that customizes Vite.</td>
+<td>Enables Vite's React plugin so JSX and React development refreshes work.
+Most other settings can use Vite's defaults.</td>
+</tr>
+</tbody>
+</table>
+<p>The commands have different jobs:</p>
+<pre class="text"><code>npm install       # Read package.json and install the tools and libraries
+npm run dev       # Start Vite's development server while you work
+npm run build     # Ask Vite to create a production-ready dist/ folder
+npm run preview   # Locally serve the production build for a final check</code></pre>
+<p>Source files use <strong>ES modules</strong>:
+<code>export</code> makes a value available from one file, and
+<code>import</code> brings it into another. Vite starts at
+<code>src/main.jsx</code>, follows those imports, and builds the complete
+module graph. This is why file paths and extensions in imports must be
+correct.</p>
+
+<h3 id="react-crash-course">React Crash Course: Components, JSX, and State</h3>
+<p><strong>React</strong> is a JavaScript library for describing user
+interfaces as components. Instead of finding DOM elements and changing them
+manually, the application stores data and returns the UI that should exist for
+that data:</p>
+<pre class="text"><code>UI = a function of state</code></pre>
+<p>The <code>react</code> package supplies component and state APIs. The
+<code>react-dom</code> package connects those React components to the
+browser's DOM; its <code>createRoot</code> function mounts this app inside
+<code>index.html</code>.</p>
+<table>
+<thead>
+<tr><th>Concept</th><th>Working definition</th><th>Example in this game</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td>A reusable JavaScript function whose capitalized name returns part of the
+interface.</td>
+<td><code>Home</code>, <code>Inventory</code>, and
+<code>GamePage</code> are components. JSX renders them as
+<code>&lt;Home /&gt;</code> or <code>&lt;Inventory /&gt;</code>.</td>
+</tr>
+<tr>
+<td><strong>JSX</strong></td>
+<td>HTML-like syntax written inside JavaScript. Vite transforms it before the
+browser runs it.</td>
+<td><code>&lt;p&gt;Gold: {player.gp}&lt;/p&gt;</code> combines an element
+with a JavaScript expression. JSX uses forms such as
+<code>className</code>, <code>htmlFor</code>, and
+<code>onClick</code>.</td>
+</tr>
+<tr>
+<td><strong>Props</strong></td>
+<td>Read-only inputs passed from a parent component to a child.</td>
+<td><code>&lt;GamePage title="Forest"&gt;</code> passes a
+<code>title</code> prop. Props let one reusable component render different
+content.</td>
+</tr>
+<tr>
+<td><strong>Children</strong></td>
+<td>The JSX nested between a component's opening and closing tags.</td>
+<td>Forest's image, story, and choices become the
+<code>children</code> rendered inside <code>GamePage</code>.</td>
+</tr>
+<tr>
+<td><strong>State</strong></td>
+<td>Data React remembers between renders. Calling its setter requests another
+render.</td>
+<td>The current page, player inventory, door state, goblin health, and form
+text are state.</td>
+</tr>
+<tr>
+<td><strong>Hook</strong></td>
+<td>A function whose name begins with <code>use</code> and connects a
+component to a React feature. Hooks are called at the top level of components
+or other Hooks, not inside conditions or event handlers.</td>
+<td><code>useState</code> adds local state, <code>useContext</code> reads
+shared state, and <code>useGame</code> is this app's custom Hook.</td>
+</tr>
+<tr>
+<td><strong>Context</strong></td>
+<td>A way for a provider to share values with components below it without
+passing the same props through every level.</td>
+<td><code>GameProvider</code> owns the current page and player;
+<code>useGame()</code> lets pages and inventory read or update them.</td>
+</tr>
+<tr>
+<td><strong>Event handler</strong></td>
+<td>A function React runs after a browser event.</td>
+<td><code>onClick={attack}</code> runs combat, and
+<code>onSubmit={submit}</code> handles the Dungeon form without loading a new
+document.</td>
+</tr>
+<tr>
+<td><strong>Conditional rendering</strong></td>
+<td>Using JavaScript conditions to choose which JSX exists.</td>
+<td>Swamp chooses between its normal scene and
+<code>DeathScreen</code>; Goblin chooses combat, victory, or game-over
+controls.</td>
+</tr>
+</tbody>
+</table>
+<p>A typical interaction follows one predictable cycle:</p>
+<pre class="text"><code>User clicks a control
+        ↓
+React runs its event handler
+        ↓
+The handler calls a state or Context update
+        ↓
+React runs affected components again
+        ↓
+React updates only the DOM needed to match the returned JSX</code></pre>
+<p><strong>Local state versus shared state:</strong> keep a value in the
+smallest component that needs it. Swamp's death choice and Dungeon's typed
+word are local because no other scene uses them. Gold, health, keys, and the
+current page are shared through Context because many scenes need them. Later
+goals make this distinction concrete one feature at a time.</p>
+
+<h3 id="how-the-project-starts">How the Project Starts</h3>
+<pre class="text"><code>index.html
+  └── loads src/main.jsx
+        └── createRoot mounts React into &lt;div id="root"&gt;
+              └── GameProvider supplies shared state
+                    └── App selects the current page component
+                          └── the page composes shared and story-specific UI</code></pre>
+<p>You do not need to memorize this vocabulary before coding. Use this
+section as a map: each concept is introduced again when the lab first applies
+it.</p>
+<h3 id="motivation">Motivation</h3>
+<p>The HTML version treats every scene as a separate document. Moving to
+another scene loads another file and starts another JavaScript
+environment. Because those documents cannot directly share variables,
+the game places <code>gp</code>, <code>hp</code>, <code>ap</code>, and
+<code>keys</code> into URL query parameters and copies those parameters
+into every link and inventory iframe.</p>
+<p>React lets the application remain in one document. Each scene becomes
+a component, and changing scenes means asking React to render a
+different component. Player data can live above every scene in a shared
+provider, so it no longer needs to travel through the URL.</p>
+<h3 id="goal">Goal</h3>
+<p>Refactor the existing interactive story into a React SPA while
+keeping feature and visual parity with the HTML version.</p><blockquote><p><strong>Work iteratively:</strong> Keep <code>npm run dev</code> running. At the end of every goal, stop coding and complete its Assess phase before continuing. Each page is imported and registered in the same goal that creates it, so the application remains runnable throughout the lab.</p></blockquote>
+<h3 id="learning-objectives">Learning Objectives</h3>
+<p>By the end of this lab, you will be able to:</p>
+<ul>
+<li>Explain the difference between a multi-page application and an
+SPA.</li>
+<li>Launch and build a React application with Vite.</li>
+<li>Write JSX and identify its differences from HTML.</li>
+<li>Create and render function components.</li>
+<li>Pass information to components with props.</li>
+<li>Respond to browser events with React event handlers.</li>
+<li>Store changing values with the <code>useState</code> Hook.</li>
+<li>Share state through a Context provider.</li>
+<li>Render different UI with conditional rendering.</li>
+<li>Build a controlled form.</li>
+<li>Reuse components instead of copying markup.</li>
+</ul>
+<h3 id="target-project-architecture">Target Project Architecture</h3>
+<pre class="text"><code>lab-01/
+├── index.html                 # One HTML document for the entire SPA
+├── package.json               # Dependencies and npm commands
+├── package-lock.json          # Exact dependency versions generated by npm
+├── vite.config.js             # Vite configuration
+├── public/
+│   └── assets/                # Images, audio, and video served by Vite
+└── src/
+    ├── main.jsx               # React entry point
+    ├── App.jsx                # Selects the current page component
+    ├── GameContext.jsx        # Shared page and player state
+    ├── components/
+    │   ├── ActionLink.jsx
+    │   ├── DeathScreen.jsx
+    │   ├── GamePage.jsx
+    │   └── Inventory.jsx
+    └── pages/
+        ├── Home.jsx
+        ├── Intro.jsx
+        ├── Overworld.jsx
+        ├── Forest.jsx
+        ├── Swamp.jsx
+        ├── Hut.jsx
+        ├── HutInside.jsx
+        ├── Dungeon.jsx
+        ├── Shoppe.jsx
+        ├── Goblin.jsx
+        └── Dragon.jsx</code></pre>
+<blockquote>
+<p>React does not remove HTML. JSX uses familiar HTML-like elements, but
+lets JavaScript decide which elements and values React should
+render.</p>
+</blockquote>
+<hr/>
+<h2 id="goal-0-compare-the-architectures">Goal 0: Compare the
+Architectures</h2>
+<h3 id="approach--design-phase">Approach — Design Phase</h3>
+<p>The story flow does not change. Only the way the browser represents
+each scene and carries state changes.</p>
+<p><strong>Design:</strong> Treat the existing HTML game as the requirements
+document. Identify which documents become page components, which repeated
+markup becomes shared components, which URL values become shared state, and
+which one-scene behaviors remain local state. This map preserves the story
+while React takes ownership of rendering and navigation.</p>
+<table>
+<thead>
+<tr class="header">
+<th>HTML Lab</th>
+<th>React Lab</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>One <code>.html</code> document per scene</td>
+<td>One <code>index.html</code>; one JSX component per scene</td>
+</tr>
+<tr class="even">
+<td><code>&lt;a href="forest.html?..."&gt;</code> loads a document</td>
+<td><code>goTo('forest')</code> updates state and renders a
+component</td>
+</tr>
+<tr class="odd">
+<td>Query strings carry player inventory</td>
+<td>Context holds one shared player object</td>
+</tr>
+<tr class="even">
+<td>An iframe renders <code>inventory.html</code></td>
+<td>An <code>&lt;Inventory /&gt;</code> component reads context</td>
+</tr>
+<tr class="odd">
+<td><code>document.body.innerHTML = ...</code> replaces the page</td>
+<td>Conditional rendering returns a different component</td>
+</tr>
+<tr class="even">
+<td>Element IDs allow scripts to mutate the DOM</td>
+<td>State changes cause React to update the DOM</td>
+</tr>
+<tr class="odd">
+<td>Inline <code>onclick="attack()"</code></td>
+<td>JSX uses <code>onClick={attack}</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="apply--implementation-phase">Apply — Implementation Phase</h3>
+<p><strong>How this extends the app:</strong> No React files change in Goal
+0. The page-name mapping and state-ownership decisions made here become the
+file structure and data flow implemented in later goals.</p>
+<p>Keep the original HTML files open for comparison. For each former
+page, create a similarly named component under <code>src/pages</code>.
+For example:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><pre class="text instruction-code code-create"><code>overworld.html  →  src/pages/Overworld.jsx
+hut-inside.html →  src/pages/HutInside.jsx
+shoppe.html     →  src/pages/Shoppe.jsx</code></pre>
+<h3 id="assess--testing-phase">Assess — Testing Phase</h3>
+<p>Before coding, trace this path in the HTML game:</p>
+<pre class="text"><code>Home → Intro → Overworld → Forest → Swamp → Hut</code></pre>
+<p>Notice that the address bar changes documents and repeats the
+inventory query string. In the React version, the browser remains in the
+Vite application and React changes the visible component.</p>
+<hr/>
+<h2 id="goal-1-create-a-vite--react-project">Goal 1: Create a Vite +
+React Project</h2>
+<h3 id="approach--design-phase-1">Approach — Design Phase</h3>
+<p>Opening an HTML file directly was enough for the original lab. React
+source uses JSX, which browsers do not read directly. Vite provides a
+development server and converts JSX into browser-ready JavaScript.</p>
+<p><strong>Design:</strong> Establish the toolchain before introducing React
+components. <code>index.html</code> supplies one mount point,
+<code>src/main.jsx</code> is the module entry, Vite resolves imports and
+transforms JSX, and <code>public/assets</code> exposes media at predictable
+URLs. This runnable foundation becomes the checkpoint for every later goal.</p>
+<h3 id="apply--implementation-phase-1">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Steps 1–2 define the
+commands and JSX transformation pipeline; Step 3 creates the one document
+React will use; Step 4 makes story media available; Step 5 provides a minimal
+runnable entry; and Step 6 installs dependencies and proves the foundation
+works before components are added.</p>
+<p><strong>Step 1: Define the project.</strong> Create
+<code>package.json</code>:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"react-adventure-game"</span><span class="fu">,</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>  <span class="dt">"private"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>  <span class="dt">"version"</span><span class="fu">:</span> <span class="st">"1.0.0"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>  <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"module"</span><span class="fu">,</span></span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a>  <span class="dt">"scripts"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a>    <span class="dt">"dev"</span><span class="fu">:</span> <span class="st">"vite"</span><span class="fu">,</span></span>
+<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a>    <span class="dt">"build"</span><span class="fu">:</span> <span class="st">"vite build"</span><span class="fu">,</span></span>
+<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a>    <span class="dt">"preview"</span><span class="fu">:</span> <span class="st">"vite preview"</span></span>
+<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-11"><a aria-hidden="true" href="#cb4-11" tabindex="-1"></a>  <span class="dt">"dependencies"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-12"><a aria-hidden="true" href="#cb4-12" tabindex="-1"></a>    <span class="dt">"@vitejs/plugin-react"</span><span class="fu">:</span> <span class="st">"6.0.4"</span><span class="fu">,</span></span>
+<span id="cb4-13"><a aria-hidden="true" href="#cb4-13" tabindex="-1"></a>    <span class="dt">"vite"</span><span class="fu">:</span> <span class="st">"8.1.5"</span><span class="fu">,</span></span>
+<span id="cb4-14"><a aria-hidden="true" href="#cb4-14" tabindex="-1"></a>    <span class="dt">"react"</span><span class="fu">:</span> <span class="st">"19.2.8"</span><span class="fu">,</span></span>
+<span id="cb4-15"><a aria-hidden="true" href="#cb4-15" tabindex="-1"></a>    <span class="dt">"react-dom"</span><span class="fu">:</span> <span class="st">"19.2.8"</span></span>
+<span id="cb4-16"><a aria-hidden="true" href="#cb4-16" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-17"><a aria-hidden="true" href="#cb4-17" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>What this adds:</strong> <code>package.json</code> identifies the
+project, records exact dependency versions, and defines the commands used
+throughout the lab. <code>type: "module"</code> enables the
+<code>import</code>/<code>export</code> syntax used by every source file.</p>
+<p><strong>Step 2: Configure Vite.</strong> Create
+<code>vite.config.js</code>:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb5"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="im">import</span> { defineConfig } <span class="im">from</span> <span class="st">'vite'</span></span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">'@vitejs/plugin-react'</span></span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="fu">defineConfig</span>({</span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a>  <span class="dt">plugins</span><span class="op">:</span> [<span class="fu">react</span>()]<span class="op">,</span></span>
+<span id="cb5-6"><a aria-hidden="true" href="#cb5-6" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>What this adds:</strong> The React plugin teaches Vite how to
+transform JSX and enables React-aware development refreshes. The configuration
+is intentionally small because Vite supplies suitable development and build
+defaults.</p>
+<p><strong>Step 3: Create the single HTML document.</strong> Replace
+<code>index.html</code> with:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="dt">&lt;!doctype </span>html<span class="dt">&gt;</span></span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">"en"</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span> <span class="er">charset</span><span class="ot">=</span><span class="st">"UTF-8"</span> <span class="dt">/&gt;</span></span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">"viewport"</span> <span class="er">content</span><span class="ot">=</span><span class="st">"width=device-width, initial-scale=1.0"</span> <span class="dt">/&gt;</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"icon"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"/assets/dragon-logo.png"</span> <span class="dt">/&gt;</span></span>
+<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>React Adventure Game<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb6-9"><a aria-hidden="true" href="#cb6-9" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb6-10"><a aria-hidden="true" href="#cb6-10" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"root"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-11"><a aria-hidden="true" href="#cb6-11" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span> <span class="er">src</span><span class="ot">=</span><span class="st">"/src/main.jsx"</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb6-12"><a aria-hidden="true" href="#cb6-12" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb6-13"><a aria-hidden="true" href="#cb6-13" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>Unlike the original lab, the body only needs a root element and one
+module script. React will create the visible page inside
+<code>#root</code>.</p>
+<p><strong>Step 4: Place the starter media where Vite can serve it.</strong>
+Create <code>public/</code>, then move or copy the downloaded starter
+<code>assets/</code> folder into it. Confirm the result is
+<code>public/assets/</code>, not <code>public/assets/assets/</code>. Files
+referenced as <code>/assets/...</code> are then available in both the
+development server and the production build.</p>
+<p><strong>Step 5: Create a temporary entry module.</strong> Create
+<code>src/main.jsx</code> so the Vite project has a valid entry point
+before React components are introduced:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div>
+<pre class="sourceCode jsx instruction-code code-create"><code>document.getElementById('root').textContent = 'Vite project ready.'</code></pre>
+<p>Goal 2 replaces this temporary entry module with the React root. For now,
+it confirms that Vite can load the project without a missing-module error.</p>
+<p><strong>Step 6: Install and launch.</strong> In a terminal, run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a><span class="ex">npm</span> run dev</span></code></pre></div>
+<p>Open the local URL Vite prints. Keep the server running while you
+work. Vite refreshes the browser after saved changes.</p>
+<h3 id="assess--testing-phase-1">Assess — Testing Phase</h3>
+<p>The browser should connect through an <code>http://localhost</code>
+address and display “Vite project ready.” Open
+<code>http://localhost:5173/assets/game-title.gif</code> and confirm the
+starter image loads. Do not open <code>index.html</code> with the
+<code>file://</code> protocol.</p>
+<hr/>
+<h2 id="goal-2-render-the-home-component-with-jsx">Goal 2: Render the
+Home Component with JSX</h2>
+<h3 id="approach--design-phase-2">Approach — Design Phase</h3>
+<p>A React component is a JavaScript function that returns UI. JSX looks
+like HTML inside JavaScript. Component names begin with capital letters
+so React can distinguish them from HTML elements.</p>
+<p><strong>Design:</strong> Separate startup from page rendering.
+<code>main.jsx</code> mounts React once, <code>App.jsx</code> selects the
+visible page, and Home becomes the first component in a registry later goals
+will extend. React derives the visible DOM from component return values rather
+than from permanent markup in <code>index.html</code>.</p>
+<h3 id="apply--implementation-phase-2">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 replaces the
+temporary module with the React root, Step 2 supplies the first visible page
+component, and Step 3 introduces the registry and selection boundary that all
+future pages will use.</p>
+<p><strong>Step 1: Mount React.</strong> Patch <code>src/main.jsx</code>, replacing the temporary Goal 1 content with the complete React entry module:</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/main.jsx</code> — complete file shown; all lines replace the temporary Goal 1 module</div><div class="sourceCode instruction-code code-create" id="cb8"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="im">import</span> { StrictMode } <span class="im">from</span> <span class="st">'react'</span></span>
+<span id="cb8-2"><a aria-hidden="true" href="#cb8-2" tabindex="-1"></a><span class="im">import</span> { createRoot } <span class="im">from</span> <span class="st">'react-dom/client'</span></span>
+<span id="cb8-3"><a aria-hidden="true" href="#cb8-3" tabindex="-1"></a><span class="im">import</span> App <span class="im">from</span> <span class="st">'./App.jsx'</span></span>
+<span id="cb8-5"><a aria-hidden="true" href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a aria-hidden="true" href="#cb8-6" tabindex="-1"></a><span class="fu">createRoot</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'root'</span>))<span class="op">.</span><span class="fu">render</span>(</span>
+<span id="cb8-7"><a aria-hidden="true" href="#cb8-7" tabindex="-1"></a>  <span class="fu">&lt;StrictMode&gt;</span></span>
+<span id="cb8-8"><a aria-hidden="true" href="#cb8-8" tabindex="-1"></a>    <span class="fu">&lt;App</span> <span class="fu">/&gt;</span></span>
+<span id="cb8-9"><a aria-hidden="true" href="#cb8-9" tabindex="-1"></a>  <span class="fu">&lt;/StrictMode&gt;</span><span class="op">,</span></span>
+<span id="cb8-10"><a aria-hidden="true" href="#cb8-10" tabindex="-1"></a>)</span></code></pre></div>
+<p><code>createRoot</code> connects React to the existing
+<code>&lt;div id="root"&gt;</code>. <code>&lt;App /&gt;</code> renders
+the App component.</p>
+<p><strong>Step 2: Convert the original body into JSX.</strong> Create
+<code>src/pages/Home.jsx</code>:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb9"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Home</span>() {</span>
+<span id="cb9-2"><a aria-hidden="true" href="#cb9-2" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-3"><a aria-hidden="true" href="#cb9-3" tabindex="-1"></a>    <span class="kw">&lt;main&gt;</span></span>
+<span id="cb9-4"><a aria-hidden="true" href="#cb9-4" tabindex="-1"></a>      <span class="kw">&lt;h1&gt;</span>React Adventure Game<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb9-5"><a aria-hidden="true" href="#cb9-5" tabindex="-1"></a>      <span class="kw">&lt;hr</span> <span class="kw">/&gt;</span></span>
+<span id="cb9-6"><a aria-hidden="true" href="#cb9-6" tabindex="-1"></a>      <span class="kw">&lt;p&gt;</span>Beware, Here be monsters!<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-7"><a aria-hidden="true" href="#cb9-7" tabindex="-1"></a>      <span class="kw">&lt;img</span> <span class="ot">src</span><span class="op">=</span><span class="st">"/assets/game-title.gif"</span> <span class="ot">width</span><span class="op">=</span><span class="st">"480"</span> <span class="ot">alt</span><span class="op">=</span><span class="st">"Adventure Game"</span> <span class="kw">/&gt;</span></span>
+<span id="cb9-8"><a aria-hidden="true" href="#cb9-8" tabindex="-1"></a>      <span class="kw">&lt;p&gt;&lt;button&gt;</span>Start<span class="kw">&lt;/button&gt;&lt;/p&gt;</span></span>
+<span id="cb9-9"><a aria-hidden="true" href="#cb9-9" tabindex="-1"></a>      <span class="kw">&lt;hr</span> <span class="kw">/&gt;</span></span>
+<span id="cb9-10"><a aria-hidden="true" href="#cb9-10" tabindex="-1"></a>      <span class="kw">&lt;h4&gt;</span>Story <span class="dv">&amp;amp;</span> Code by Ted<span class="kw">&lt;/h4&gt;</span></span>
+<span id="cb9-11"><a aria-hidden="true" href="#cb9-11" tabindex="-1"></a>    <span class="kw">&lt;/main&gt;</span></span>
+<span id="cb9-12"><a aria-hidden="true" href="#cb9-12" tabindex="-1"></a>  )</span>
+<span id="cb9-13"><a aria-hidden="true" href="#cb9-13" tabindex="-1"></a>}</span></code></pre></div>
+<p>Important JSX differences:</p>
+<ul>
+<li>Return one parent element. Here, <code>&lt;main&gt;</code> contains
+everything.</li>
+<li>Close every element, including <code>&lt;hr /&gt;</code> and
+<code>&lt;img /&gt;</code>.</li>
+<li>Use <code>{}</code> to enter JavaScript inside JSX.</li>
+<li>Use <code>className</code> instead of HTML's <code>class</code>
+attribute.</li>
+<li>Accessibility tools expect meaningful <code>alt</code> text on
+images.</li>
+</ul>
+<p><strong>Step 3: Create the page registry.</strong> Create
+<code>src/App.jsx</code> with a scalable page map from the beginning:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div>
+<pre class="sourceCode jsx instruction-code code-create"><code>import { useState } from 'react'
+import Home from './pages/Home.jsx'
+
+const pages = {
+  home: Home,
+}
+
+export default function App() {
+  const [page, setPage] = useState('home')
+  const Page = pages[page] ?? Home
+
+  return &lt;Page goTo={setPage} /&gt;
+}</code></pre>
+<p>The <code>pages</code> object is the SPA equivalent of the original
+folder of HTML documents. Each key is a page name, and each value is the
+component React should render. For now, the registry contains only Home.
+Every later goal will import one or more new page components and add
+their entries to this same object.</p>
+<h3 id="assess--testing-phase-2">Assess — Testing Phase</h3>
+<p>The browser should show the same title image, text, and Start button
+as the HTML index page. The Start button does not navigate yet because
+Intro has not been registered. Inspect the page source:
+<code>index.html</code> still contains only <code>#root</code>. React
+creates the rendered elements at runtime.</p>
+<hr/>
+<h2 id="goal-3-create-spa-page-navigation">Goal 3: Create SPA Page
+Navigation</h2>
+<h3 id="approach--design-phase-3">Approach — Design Phase</h3>
+<p>The HTML app navigates by assigning a file to an anchor's
+<code>href</code>. The SPA stores the current page name in state and
+looks that name up in the <code>pages</code> registry created in Goal 2.
+State is a value React remembers between renders. Calling its setter
+selects another registered component.</p>
+<p><strong>Design:</strong> Represent navigation as data. A page-name string
+is state, the registry maps that string to a component, and event handlers
+update it. React then re-renders <code>App</code> and selects the new scene
+without requesting another HTML document. This goal keeps the state local
+temporarily so the pattern is visible before Context centralizes it.</p>
+<h3 id="apply--implementation-phase-3">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 creates the first
+destination component, Step 2 makes that destination selectable, and Step 3
+connects Home's Start event to the page-state setter. Together they produce
+the first working SPA transition.</p>
+<p><strong>Step 1: Create <code>src/pages/Intro.jsx</code>.</strong> Its button
+receives the existing <code>goTo</code> function and selects the next
+page by name:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div>
+<pre class="sourceCode jsx instruction-code code-create"><code>export default function Intro({ goTo }) {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Story Introduction&lt;/h1&gt;
+      &lt;hr /&gt;
+      &lt;img src="/assets/intro.gif" width="360" alt="Village elder" /&gt;
+      &lt;p&gt;
+        Welcome, traveler! Our land is plagued by a great evil.
+        Please save us. Here, take 5 gold as a deposit.
+      &lt;/p&gt;
+      &lt;button onClick={() =&gt; goTo('overworld')}&gt;
+        Adventure out of town
+      &lt;/button&gt;
+    &lt;/main&gt;
+  )
+}</code></pre>
+<p><strong>Step 2: Patch <code>src/App.jsx</code>.</strong> Import Intro and
+register it beside Home. The page-selection logic does not change:</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span>import { useState } from 'react'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span class="added-line">import Intro from './pages/Intro.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span class="added-line">  intro: Intro,</span>
+<span>}</span>
+<span></span>
+<span>export default function App() {</span>
+<span>  const [page, setPage] = useState('home')</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page goTo={setPage} /&gt;</span>
+<span>}</span>
+</code></pre>
+<p><strong>Step 3: Patch <code>src/pages/Home.jsx</code>.</strong> Receive
+<code>goTo</code> and use it when Start is clicked:</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/pages/Home.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span class="added-line">export default function Home({ goTo }) {</span>
+<span>  return (</span>
+<span>    &lt;main&gt;</span>
+<span>      &lt;h1&gt;React Adventure Game&lt;/h1&gt;</span>
+<span>      &lt;hr /&gt;</span>
+<span>      &lt;p&gt;Beware, Here be monsters!&lt;/p&gt;</span>
+<span>      &lt;img src="/assets/game-title.gif" width="480" alt="Adventure Game" /&gt;</span>
+<span class="added-line">      &lt;p&gt;&lt;button onClick={() =&gt; goTo('intro')}&gt;Start&lt;/button&gt;&lt;/p&gt;</span>
+<span>      &lt;hr /&gt;</span>
+<span>      &lt;h4&gt;Story &amp;amp; Code by Ted&lt;/h4&gt;</span>
+<span>    &lt;/main&gt;</span>
+<span>  )</span>
+<span>}</span>
+</code></pre>
+<p>Adding a page now follows the same repeatable pattern used throughout
+the rest of the lab: create the component, import it into
+<code>App.jsx</code>, and add one entry to <code>pages</code>.</p>
+<h3 id="assess--testing-phase-3">Assess — Testing Phase</h3>
+<p>Click Start. The Home component should disappear and Intro should
+appear without loading another HTML file. In the Network panel, confirm
+that clicking does not request <code>intro.html</code>.</p>
+<hr/>
+<h2 id="goal-4-share-inventory-with-context">Goal 4: Share Inventory
+with Context</h2>
+<h3 id="approach--design-phase-4">Approach — Design Phase</h3>
+<p>Passing <code>goTo</code> and player data through every page as props
+would become repetitive. Context allows a provider near the top of the
+component tree to share values with any component beneath it.</p>
+<p><strong>Design:</strong> Make <code>GameProvider</code> the owner of
+cross-scene state: the current page and player inventory. It exposes focused
+actions—<code>goTo</code>, <code>updatePlayer</code>,
+<code>startGame</code>, and <code>acceptQuest</code>—so consumers request
+changes instead of mutating data. Provider updates re-render components that
+read the changed Context value.</p>
+<p>The HTML inventory query string:</p>
+<pre class="text"><code>?gp=0&amp;hp=3&amp;ap=1&amp;keys=0</code></pre>
+<p>becomes one JavaScript object:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb15-1"><a aria-hidden="true" href="#cb15-1" tabindex="-1"></a>{ <span class="dt">gp</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">hp</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">ap</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">keys</span><span class="op">:</span> <span class="dv">0</span> }</span></code></pre></div>
+<p>The player begins with zero gold. Accepting the elder's quest in Intro
+adds the promised 5-gold deposit before the app renders Overworld.</p>
+<h3 id="apply--implementation-phase-4">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 creates the shared
+state owner and game actions; Step 2 places that provider above the app; Step
+3 creates a Context consumer for inventory; Step 4 moves App and Home from
+temporary props/local state to Context; and Step 5 connects the Intro story
+action to the shared gold update.</p>
+<p><strong>Step 1: Create <code>src/GameContext.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb16"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb16-1"><a aria-hidden="true" href="#cb16-1" tabindex="-1"></a><span class="im">import</span> { createContext<span class="op">,</span> useContext<span class="op">,</span> useState } <span class="im">from</span> <span class="st">'react'</span></span>
+<span id="cb16-2"><a aria-hidden="true" href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a aria-hidden="true" href="#cb16-3" tabindex="-1"></a><span class="kw">const</span> startingPlayer <span class="op">=</span> { <span class="dt">gp</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">hp</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">ap</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">keys</span><span class="op">:</span> <span class="dv">0</span> }</span>
+<span id="cb16-4"><a aria-hidden="true" href="#cb16-4" tabindex="-1"></a><span class="kw">const</span> GameContext <span class="op">=</span> <span class="fu">createContext</span>()</span>
+<span id="cb16-5"><a aria-hidden="true" href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a aria-hidden="true" href="#cb16-6" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">GameProvider</span>({ children }) {</span>
+<span id="cb16-7"><a aria-hidden="true" href="#cb16-7" tabindex="-1"></a>  <span class="kw">const</span> [page<span class="op">,</span> setPage] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'home'</span>)</span>
+<span id="cb16-8"><a aria-hidden="true" href="#cb16-8" tabindex="-1"></a>  <span class="kw">const</span> [player<span class="op">,</span> setPlayer] <span class="op">=</span> <span class="fu">useState</span>(startingPlayer)</span>
+<span id="cb16-9"><a aria-hidden="true" href="#cb16-9" tabindex="-1"></a></span>
+<span id="cb16-10"><a aria-hidden="true" href="#cb16-10" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">goTo</span>(nextPage) {</span>
+<span id="cb16-11"><a aria-hidden="true" href="#cb16-11" tabindex="-1"></a>    <span class="fu">setPage</span>(nextPage)</span>
+<span id="cb16-12"><a aria-hidden="true" href="#cb16-12" tabindex="-1"></a>  }</span>
+<span id="cb16-13"><a aria-hidden="true" href="#cb16-13" tabindex="-1"></a></span>
+<span id="cb16-14"><a aria-hidden="true" href="#cb16-14" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">updatePlayer</span>(changes) {</span>
+<span id="cb16-15"><a aria-hidden="true" href="#cb16-15" tabindex="-1"></a>    <span class="fu">setPlayer</span>((current) <span class="kw">=&gt;</span> ({ <span class="op">...</span>current<span class="op">,</span> <span class="op">...</span>changes }))</span>
+<span id="cb16-16"><a aria-hidden="true" href="#cb16-16" tabindex="-1"></a>  }</span>
+<span id="cb16-17"><a aria-hidden="true" href="#cb16-17" tabindex="-1"></a></span>
+<span id="cb16-18"><a aria-hidden="true" href="#cb16-18" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">startGame</span>() {</span>
+<span id="cb16-19"><a aria-hidden="true" href="#cb16-19" tabindex="-1"></a>    <span class="fu">setPlayer</span>(startingPlayer)</span>
+<span id="cb16-20"><a aria-hidden="true" href="#cb16-20" tabindex="-1"></a>    <span class="fu">setPage</span>(<span class="st">'intro'</span>)</span>
+<span id="cb16-21"><a aria-hidden="true" href="#cb16-21" tabindex="-1"></a>  }</span>
+<span id="cb16-22"><a aria-hidden="true" href="#cb16-22" tabindex="-1"></a></span>
+<span>  <span class="kw">function</span> <span class="fu">acceptQuest</span>() {</span>
+<span>    <span class="fu">setPlayer</span>((current) <span class="kw">=&gt;</span> ({ <span class="op">...</span>current<span class="op">,</span> <span class="dt">gp</span><span class="op">:</span> current<span class="op">.</span><span class="at">gp</span> <span class="op">+</span> <span class="dv">5</span> }))</span>
+<span>  }</span>
+<span></span>
+<span id="cb16-23"><a aria-hidden="true" href="#cb16-23" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb16-24"><a aria-hidden="true" href="#cb16-24" tabindex="-1"></a>    <span class="fu">&lt;GameContext.Provider</span> <span class="ot">value</span><span class="op">=</span><span class="va">{</span>{ page<span class="op">,</span> player<span class="op">,</span> goTo<span class="op">,</span> updatePlayer<span class="op">,</span> startGame<span class="op">,</span> acceptQuest }<span class="va">}</span><span class="fu">&gt;</span></span>
+<span id="cb16-25"><a aria-hidden="true" href="#cb16-25" tabindex="-1"></a>      <span class="va">{</span>children<span class="va">}</span></span>
+<span id="cb16-26"><a aria-hidden="true" href="#cb16-26" tabindex="-1"></a>    <span class="fu">&lt;/GameContext.Provider&gt;</span></span>
+<span id="cb16-27"><a aria-hidden="true" href="#cb16-27" tabindex="-1"></a>  )</span>
+<span id="cb16-28"><a aria-hidden="true" href="#cb16-28" tabindex="-1"></a>}</span>
+<span id="cb16-29"><a aria-hidden="true" href="#cb16-29" tabindex="-1"></a></span>
+<span id="cb16-30"><a aria-hidden="true" href="#cb16-30" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">useGame</span>() {</span>
+<span id="cb16-31"><a aria-hidden="true" href="#cb16-31" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">useContext</span>(GameContext)</span>
+<span id="cb16-32"><a aria-hidden="true" href="#cb16-32" tabindex="-1"></a>}</span></code></pre></div>
+<p><code>createContext</code> defines the shared channel,
+<code>GameProvider</code> owns its state, and <code>useGame</code> is a custom
+Hook that gives consumers one consistent way to read the nearest provider.
+The two <code>useState</code> calls are independent: page changes select UI,
+while player changes preserve inventory across those page selections.</p>
+<p>The spread syntax <code>{ ...current, ...changes }</code> copies the
+current player and overwrites only the fields supplied in
+<code>changes</code>. React state should be replaced, not mutated
+directly.</p>
+<p><strong>Step 2: Wrap App in the provider in
+<code>src/main.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/main.jsx</code> — complete file shown; new or changed lines are highlighted</div><div class="sourceCode instruction-code code-add" id="cb17"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span>import { StrictMode } from 'react'</span>
+<span>import { createRoot } from 'react-dom/client'</span>
+<span>import App from './App.jsx'</span>
+<span class="added-line">import { GameProvider } from './GameContext.jsx'</span>
+<span></span>
+<span>createRoot(document.getElementById('root')).render(</span>
+<span>  &lt;StrictMode&gt;</span>
+<span class="added-line">    &lt;GameProvider&gt;</span>
+<span>      &lt;App /&gt;</span>
+<span class="added-line">    &lt;/GameProvider&gt;</span>
+<span>  &lt;/StrictMode&gt;,</span>
+<span>)</span>
+</code></pre></div>
+<p><strong>Step 3: Create
+<code>src/components/Inventory.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb18"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb18-1"><a aria-hidden="true" href="#cb18-1" tabindex="-1"></a><span class="im">import</span> { useGame } <span class="im">from</span> <span class="st">'../GameContext.jsx'</span></span>
+<span id="cb18-2"><a aria-hidden="true" href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a aria-hidden="true" href="#cb18-3" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Inventory</span>() {</span>
+<span id="cb18-4"><a aria-hidden="true" href="#cb18-4" tabindex="-1"></a>  <span class="kw">const</span> { player } <span class="op">=</span> <span class="fu">useGame</span>()</span>
+<span id="cb18-5"><a aria-hidden="true" href="#cb18-5" tabindex="-1"></a></span>
+<span id="cb18-6"><a aria-hidden="true" href="#cb18-6" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb18-7"><a aria-hidden="true" href="#cb18-7" tabindex="-1"></a>    <span class="kw">&lt;section</span> <span class="ot">className</span><span class="op">=</span><span class="st">"inventory"</span><span class="kw">&gt;</span></span>
+<span id="cb18-8"><a aria-hidden="true" href="#cb18-8" tabindex="-1"></a>      Inventory:</span>
+<span id="cb18-9"><a aria-hidden="true" href="#cb18-9" tabindex="-1"></a>      <span class="kw">&lt;hr</span> <span class="kw">/&gt;</span></span>
+<span id="cb18-10"><a aria-hidden="true" href="#cb18-10" tabindex="-1"></a>      <span class="kw">&lt;table&gt;</span></span>
+<span id="cb18-11"><a aria-hidden="true" href="#cb18-11" tabindex="-1"></a>        <span class="kw">&lt;thead&gt;&lt;tr&gt;&lt;th&gt;</span>💰<span class="kw">&lt;/th&gt;&lt;th&gt;</span>💜<span class="kw">&lt;/th&gt;&lt;th&gt;</span>🗡<span class="kw">&lt;/th&gt;&lt;th&gt;</span>🔑<span class="kw">&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</span></span>
+<span id="cb18-12"><a aria-hidden="true" href="#cb18-12" tabindex="-1"></a>        <span class="kw">&lt;tbody&gt;</span></span>
+<span id="cb18-13"><a aria-hidden="true" href="#cb18-13" tabindex="-1"></a>          <span class="kw">&lt;tr&gt;&lt;td&gt;</span><span class="va">{</span>player<span class="op">.</span><span class="at">gp</span><span class="va">}</span><span class="kw">&lt;/td&gt;&lt;td&gt;</span><span class="va">{</span>player<span class="op">.</span><span class="at">hp</span><span class="va">}</span><span class="kw">&lt;/td&gt;&lt;td&gt;</span><span class="va">{</span>player<span class="op">.</span><span class="at">ap</span><span class="va">}</span><span class="kw">&lt;/td&gt;&lt;td&gt;</span><span class="va">{</span>player<span class="op">.</span><span class="at">keys</span><span class="va">}</span><span class="kw">&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb18-14"><a aria-hidden="true" href="#cb18-14" tabindex="-1"></a>        <span class="kw">&lt;/tbody&gt;</span></span>
+<span id="cb18-15"><a aria-hidden="true" href="#cb18-15" tabindex="-1"></a>      <span class="kw">&lt;/table&gt;</span></span>
+<span id="cb18-16"><a aria-hidden="true" href="#cb18-16" tabindex="-1"></a>    <span class="kw">&lt;/section&gt;</span></span>
+<span id="cb18-17"><a aria-hidden="true" href="#cb18-17" tabindex="-1"></a>  )</span>
+<span id="cb18-18"><a aria-hidden="true" href="#cb18-18" tabindex="-1"></a>}</span></code></pre></div>
+<p>The braces in <code>{player.gp}</code> tell JSX to render a
+JavaScript value. There is no iframe, query string,
+<code>getElementById</code>, or <code>innerText</code> assignment.</p>
+<p><strong>Step 4: Read Context from <code>src/App.jsx</code> and
+<code>src/pages/Home.jsx</code>.</strong> Remove the temporary
+<code>goTo</code> props from Goal 3. App now reads the current page from
+Context, and Home starts a fresh game through Context.</p>
+<p>Patch <code>src/App.jsx</code>:</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span class="added-line">import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>}</span>
+<span></span>
+<span>export default function App() {</span>
+<span class="added-line">  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span class="added-line">  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<p>Remove the old <code>useState</code> import and the local
+<code>const [page, setPage]</code> line. The registry and dynamic
+<code>Page</code> selection stay intact.</p>
+<p>Patch <code>src/pages/Home.jsx</code> so Start resets the shared player
+state through Context instead of receiving a navigation prop:</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/pages/Home.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span class="added-line">import { useGame } from '../GameContext.jsx'</span>
+<span></span>
+<span class="added-line">export default function Home() {</span>
+<span class="added-line">  const { startGame } = useGame()</span>
+<span></span>
+<span>  return (</span>
+<span>    &lt;main&gt;</span>
+<span>      &lt;h1&gt;React Adventure Game&lt;/h1&gt;</span>
+<span>      &lt;hr /&gt;</span>
+<span>      &lt;p&gt;Beware, Here be monsters!&lt;/p&gt;</span>
+<span>      &lt;img src="/assets/game-title.gif" width="480" alt="Adventure Game" /&gt;</span>
+<span class="added-line">      &lt;p&gt;&lt;button onClick={startGame}&gt;Start&lt;/button&gt;&lt;/p&gt;</span>
+<span>      &lt;hr /&gt;</span>
+<span>      &lt;h4&gt;Story &amp;amp; Code by Ted&lt;/h4&gt;</span>
+<span>    &lt;/main&gt;</span>
+<span>  )</span>
+<span>}</span>
+</code></pre>
+<p>From this point forward, page components read shared values from Context
+instead of receiving them through <code>src/App.jsx</code>.</p>
+<p><strong>Step 5: Display the starting inventory and award the quest deposit in
+<code>src/pages/Intro.jsx</code>.</strong> Intro is the first in-game scene,
+so it should show the player's fresh starting inventory. Accepting the quest
+adds 5 gold and selects Overworld. Patch Intro to read both actions from
+Context and render the Inventory component:</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/pages/Intro.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span class="added-line">import { useGame } from '../GameContext.jsx'</span>
+<span class="added-line">import Inventory from '../components/Inventory.jsx'</span>
+<span></span>
+<span class="added-line">export default function Intro() {</span>
+<span class="added-line">  const { goTo, acceptQuest } = useGame()</span>
+<span></span>
+<span class="added-line">  function beginAdventure() {</span>
+<span class="added-line">    acceptQuest()</span>
+<span class="added-line">    goTo('overworld')</span>
+<span class="added-line">  }</span>
+<span></span>
+<span>  return (</span>
+<span>    &lt;main&gt;</span>
+<span>      &lt;h1&gt;Story Introduction&lt;/h1&gt;</span>
+<span>      &lt;hr /&gt;</span>
+<span>      &lt;img src="/assets/intro.gif" width="360" alt="Village elder" /&gt;</span>
+<span>      &lt;p&gt;</span>
+<span>        Welcome, traveler! Our land is plagued by a great evil.</span>
+<span>        Please save us. Here, take 5 gold as a deposit.</span>
+<span>      &lt;/p&gt;</span>
+<span class="added-line">      &lt;button onClick={beginAdventure}&gt;</span>
+<span>        Adventure out of town</span>
+<span>      &lt;/button&gt;</span>
+<span class="added-line">      &lt;hr /&gt;</span>
+<span class="added-line">      &lt;Inventory /&gt;</span>
+<span>    &lt;/main&gt;</span>
+<span>  )</span>
+<span>}</span>
+</code></pre>
+<p>The Inventory component now remains part of Intro. The deposit is awarded
+by the story action, not by Start. Because the destination is not registered
+until Goal 6, do not click the action yet.</p>
+<h3 id="assess--testing-phase-4">Assess — Testing Phase</h3>
+<p>Click Start and confirm <code>src/pages/Intro.jsx</code> displays the
+starting inventory: 0 gold, 3 health, 1 attack, and 0 keys. Temporarily change
+one value in <code>startingPlayer</code> inside
+<code>src/GameContext.jsx</code>, restart the game, and confirm Intro displays
+the changed value. Restore the original value before continuing. Inspect
+<code>src/App.jsx</code> and confirm it no longer passes a
+<code>goTo</code> prop. Do not click “Adventure out of town” yet:
+Overworld is created and registered in Goal 6.</p>
+<hr/>
+<h2 id="goal-5-reuse-components-and-props">Goal 5: Reuse Components and
+Props</h2>
+<h3 id="approach--design-phase-5">Approach — Design Phase</h3>
+<p>Every original scene repeats a heading, horizontal rule, and
+inventory iframe. React components let the app define that structure
+once. Props supply the parts that differ.</p>
+<p><strong>Design:</strong> Separate stable scene structure from variable
+content. <code>GamePage</code> owns the repeated heading and inventory,
+<code>ActionLink</code> owns SPA link behavior, and pages supply titles and
+<code>children</code>. The optional <code>beforeNavigate</code> prop supports
+story actions such as awarding the deposit while ordinary links stay simple.</p>
+<h3 id="apply--implementation-phase-5">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 centralizes the
+scene shell, Step 2 centralizes state-driven link navigation, and Step 3
+refactors Intro to prove that a page can compose both abstractions while still
+performing its unique quest action.</p>
+<p>As you create each file in the following goals, import every
+component and Hook it uses. For example, a page using
+<code>GamePage</code>, <code>ActionLink</code>, and
+<code>useState</code> needs imports for all three at the top of the
+file. The completed project files provide an exact reference.</p>
+<p><strong>Step 1: Create <code>src/components/GamePage.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb20"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb20-1"><a aria-hidden="true" href="#cb20-1" tabindex="-1"></a><span class="im">import</span> Inventory <span class="im">from</span> <span class="st">'./Inventory.jsx'</span></span>
+<span id="cb20-2"><a aria-hidden="true" href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a aria-hidden="true" href="#cb20-3" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">GamePage</span>({ title<span class="op">,</span> children<span class="op">,</span> showInventory <span class="op">=</span> <span class="kw">true</span> }) {</span>
+<span id="cb20-4"><a aria-hidden="true" href="#cb20-4" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb20-5"><a aria-hidden="true" href="#cb20-5" tabindex="-1"></a>    <span class="kw">&lt;main&gt;</span></span>
+<span id="cb20-6"><a aria-hidden="true" href="#cb20-6" tabindex="-1"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>title<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb20-7"><a aria-hidden="true" href="#cb20-7" tabindex="-1"></a>      <span class="kw">&lt;hr</span> <span class="kw">/&gt;</span></span>
+<span id="cb20-8"><a aria-hidden="true" href="#cb20-8" tabindex="-1"></a>      <span class="va">{</span>children<span class="va">}</span></span>
+<span id="cb20-9"><a aria-hidden="true" href="#cb20-9" tabindex="-1"></a>      <span class="va">{</span>showInventory <span class="op">&amp;&amp; </span><span class="kw">&lt;&gt;&lt;hr</span> <span class="kw">/&gt;</span><span class="fu">&lt;Inventory</span> <span class="fu">/&gt;</span><span class="kw">&lt;/&gt;</span><span class="va">}</span></span>
+<span id="cb20-10"><a aria-hidden="true" href="#cb20-10" tabindex="-1"></a>    <span class="kw">&lt;/main&gt;</span></span>
+<span id="cb20-11"><a aria-hidden="true" href="#cb20-11" tabindex="-1"></a>  )</span>
+<span id="cb20-12"><a aria-hidden="true" href="#cb20-12" tabindex="-1"></a>}</span></code></pre></div>
+<p><code>children</code> represents JSX placed between
+<code>&lt;GamePage&gt;</code> and <code>&lt;/GamePage&gt;</code>. The
+<code>&amp;&amp;</code> operator conditionally renders inventory only
+when <code>showInventory</code> is true.</p>
+<p><strong>Step 2: Create <code>src/components/ActionLink.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb21"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb21-1"><a aria-hidden="true" href="#cb21-1" tabindex="-1"></a><span class="im">import</span> { useGame } <span class="im">from</span> <span class="st">'../GameContext.jsx'</span></span>
+<span id="cb21-2"><a aria-hidden="true" href="#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a aria-hidden="true" href="#cb21-3" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ActionLink</span>({ to<span class="op">,</span> children<span class="op">,</span> beforeNavigate }) {</span>
+<span id="cb21-4"><a aria-hidden="true" href="#cb21-4" tabindex="-1"></a>  <span class="kw">const</span> { goTo } <span class="op">=</span> <span class="fu">useGame</span>()</span>
+<span id="cb21-5"><a aria-hidden="true" href="#cb21-5" tabindex="-1"></a></span>
+<span id="cb21-6"><a aria-hidden="true" href="#cb21-6" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">navigate</span>(<span class="bu">event</span>) {</span>
+<span id="cb21-7"><a aria-hidden="true" href="#cb21-7" tabindex="-1"></a>    <span class="bu">event</span><span class="op">.</span><span class="fu">preventDefault</span>()</span>
+<span>    beforeNavigate<span class="op">?.</span>()</span>
+<span id="cb21-8"><a aria-hidden="true" href="#cb21-8" tabindex="-1"></a>    <span class="fu">goTo</span>(to)</span>
+<span id="cb21-9"><a aria-hidden="true" href="#cb21-9" tabindex="-1"></a>  }</span>
+<span id="cb21-10"><a aria-hidden="true" href="#cb21-10" tabindex="-1"></a></span>
+<span id="cb21-11"><a aria-hidden="true" href="#cb21-11" tabindex="-1"></a>  <span class="cf">return </span><span class="kw">&lt;a</span> <span class="ot">href</span><span class="op">=</span><span class="va">{</span><span class="vs">`#</span><span class="sc">${</span>to<span class="sc">}</span><span class="vs">`</span><span class="va">}</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>navigate<span class="va">}</span><span class="kw">&gt;</span><span class="va">{</span>children<span class="va">}</span><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb21-12"><a aria-hidden="true" href="#cb21-12" tabindex="-1"></a>}</span></code></pre></div>
+<p>The anchor remains recognizable and accessible. The optional
+<code>beforeNavigate</code> callback lets a story action update state before
+the destination renders; links that do not supply it navigate normally.
+<code>preventDefault()</code> stops the browser's normal link
+navigation, and <code>goTo</code> changes the component shown by the
+SPA.</p>
+<p><strong>Step 3: Refactor <code>src/pages/Intro.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/pages/Intro.jsx</code> — complete file shown; new or changed lines are highlighted</div><div class="sourceCode instruction-code code-add" id="cb22"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span class="added-line">import GamePage from '../components/GamePage.jsx'</span>
+<span class="added-line">import ActionLink from '../components/ActionLink.jsx'</span>
+<span class="added-line">import { useGame } from '../GameContext.jsx'</span>
+<span></span>
+<span class="added-line">export default function Intro() {</span>
+<span class="added-line">  const { acceptQuest } = useGame()</span>
+<span></span>
+<span>  return (</span>
+<span class="added-line">    &lt;GamePage title="Story Introduction"&gt;</span>
+<span>      &lt;img src="/assets/intro.gif" width="360" alt="Village elder" /&gt;</span>
+<span>      &lt;p&gt;</span>
+<span>        Welcome, traveler! Our land is plagued by a great evil.</span>
+<span>        Please save us. Here, take 5 gold as a deposit.</span>
+<span>      &lt;/p&gt;</span>
+<span class="added-line">      &lt;h4&gt;</span>
+<span class="added-line">        &lt;ActionLink to="overworld" beforeNavigate={acceptQuest}&gt;</span>
+<span class="added-line">          Adventure out of town</span>
+<span class="added-line">        &lt;/ActionLink&gt;</span>
+<span class="added-line">      &lt;/h4&gt;</span>
+<span class="added-line">    &lt;/GamePage&gt;</span>
+<span>  )</span>
+<span>}</span>
+</code></pre></div>
+<h3 id="assess--testing-phase-5">Assess — Testing Phase</h3>
+<p>Click Start and verify <code>src/pages/Intro.jsx</code> renders through
+<code>GamePage</code> with the zero-gold starting inventory still visible. Inspect the
+rendered “Adventure out of town” link and confirm its
+<code>href</code> is <code>#overworld</code>. Confirm the listing supplies
+<code>acceptQuest</code> through <code>beforeNavigate</code>. Its complete
+award-and-navigation behavior is tested after Overworld is registered in
+Goal 6.</p>
+<hr/>
+<h2 id="goal-6-convert-the-overworld-and-forest">Goal 6: Convert the
+Overworld and Forest</h2>
+<h3 id="approach--design-phase-6">Approach — Design Phase</h3>
+<p>These scenes are mostly static content and links, making them direct
+HTML-to-JSX conversions. Each old file becomes a component.</p>
+<p><strong>Design:</strong> Use Overworld as the navigation hub and Forest as
+a branch page. Both compose the shared components from Goal 5, so they contain
+story content without duplicating inventory or link behavior. Creating and
+registering both also makes the Intro deposit-and-navigation path testable end
+to end for the first time.</p>
+<h3 id="apply--implementation-phase-6">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 adds the hub that
+links to major story branches, Step 2 adds the first branch scene, and Step 3
+registers both so the Intro → Overworld → Forest path becomes reachable and
+the quest deposit can be observed after navigation.</p>
+<p><strong>Step 1: Create <code>src/pages/Overworld.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb23"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function Overworld() {
+  return (
+    &lt;GamePage title="Overworld"&gt;
+      &lt;img src="/assets/overworld-map.gif" width="480" alt="Overworld map" /&gt;
+      &lt;h4&gt;Where do you want to go?&lt;/h4&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;ActionLink to="dungeon"&gt;Dungeon&lt;/ActionLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;ActionLink to="forest"&gt;Forest&lt;/ActionLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;ActionLink to="shoppe"&gt;Shoppe&lt;/ActionLink&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p><strong>What this adds:</strong> Overworld is a presentational page that
+declares destinations through <code>ActionLink</code>. Some destinations are
+created later; the fallback in App keeps the app from crashing, while each
+link becomes fully testable when its page is registered.</p>
+<p><strong>Step 2: Create <code>src/pages/Forest.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb24"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function Forest() {
+  return (
+    &lt;GamePage title="Forest"&gt;
+      &lt;img src="/assets/forest.gif" width="480" alt="Forest" /&gt;
+      &lt;p&gt;You wander into the forest. To the left is a winding path up the hills, to the right is a path into the swamps.&lt;/p&gt;
+      &lt;h4&gt;What do you do?&lt;/h4&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;ActionLink to="goblin"&gt;Go left into the Hills&lt;/ActionLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;ActionLink to="swamp"&gt;Go right into the Swamp&lt;/ActionLink&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;&lt;ActionLink to="overworld"&gt;Exit&lt;/ActionLink&gt;&lt;/p&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p><strong>What this adds:</strong> Forest demonstrates that another page can
+reuse the same shell and link abstraction while supplying different story
+content. Its Exit link also creates a return edge to the hub.</p>
+<p><strong>Step 3: Register Overworld and Forest in
+<code>src/App.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span class="added-line">import Overworld from './pages/Overworld.jsx'</span>
+<span class="added-line">import Forest from './pages/Forest.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span class="added-line">}</span>
+<span class="added-line"></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<p><code>pages[page]</code> selects a component using the current state
+string. Assigning it to capitalized <code>Page</code> allows JSX to
+render it.</p>
+<h3 id="assess--testing-phase-6">Assess — Testing Phase</h3>
+<p>Click Start and confirm Intro shows 0 gold. Choose “Adventure out of
+town” and confirm Overworld shows 5 gold: <code>beforeNavigate</code>
+awarded the elder's deposit before navigation. Continue to Forest and
+back. Inventory should remain at 5 gold without appearing in the URL.
+Return Home, click Start again, and confirm Intro resets to 0 gold before
+the quest is accepted again.</p>
+<hr/>
+<h2 id="goal-7-use-local-state-in-the-swamp">Goal 7: Use Local State in
+the Swamp</h2>
+<h3 id="approach--design-phase-7">Approach — Design Phase</h3>
+<p>The original <code>die()</code> function overwrites
+<code>document.body.innerHTML</code>. React should describe both
+possible screens and use state to choose one. The <code>dead</code>
+value belongs only to the Swamp, so it is local component state rather
+than shared game state.</p>
+<p><strong>Design:</strong> Model the Swamp as alive and dead render states
+selected by a local boolean. No other scene needs that choice, so
+<code>useState</code> belongs inside Swamp. A reusable
+<code>DeathScreen</code> owns the common game-over UI while Swamp supplies its
+specific image and message through props and children.</p>
+<h3 id="apply--implementation-phase-7">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 extracts reusable
+game-over presentation, Step 2 adds Swamp's local alive/dead behavior, and
+Step 3 registers Swamp so the existing Forest choice reaches a complete
+destination.</p>
+<p><strong>Step 1: Create a reusable
+<code>src/components/DeathScreen.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb26"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import ActionLink from './ActionLink.jsx'
+
+export default function DeathScreen({ image, children }) {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;You Die&lt;/h1&gt;
+      &lt;img src={image} width="480" alt="Game over" /&gt;
+      &lt;p&gt;{children}&lt;/p&gt;
+      &lt;ActionLink to="home"&gt;&lt;h4&gt;Game Over&lt;/h4&gt;&lt;/ActionLink&gt;
+      &lt;audio src="/assets/scream.mp3" autoPlay /&gt;
+    &lt;/main&gt;
+  )
+}</code></pre></div>
+<p><strong>What this adds:</strong> <code>DeathScreen</code> turns repeated
+game-over markup into a configurable component. The <code>image</code> prop
+and <code>children</code> message vary by cause of death, while navigation
+home and the scream audio remain consistent.</p>
+<p><strong>Step 2: Create <code>src/pages/Swamp.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb27"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import { useState } from 'react'
+import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+import DeathScreen from '../components/DeathScreen.jsx'
+
+export default function Swamp() {
+  const [dead, setDead] = useState(false)
+
+  if (dead) {
+    return &lt;DeathScreen image="/assets/gator.jpg"&gt;A giant alligator eats you.&lt;/DeathScreen&gt;
+  }
+
+  return (
+    &lt;GamePage title="Swamp"&gt;
+      &lt;img src="/assets/swamp-hut.jpg" width="480" alt="Witch hut in the swamp" /&gt;
+      &lt;p&gt;You come across a creepy witch hut in the swamp.&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;ActionLink to="hut"&gt;Go into the hut&lt;/ActionLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;button onClick={() =&gt; setDead(true)}&gt;Search outside the hut&lt;/button&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;ActionLink to="overworld"&gt;Exit&lt;/ActionLink&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p>This is conditional rendering: when <code>dead</code> is true, the
+function returns a different component.</p>
+<p><strong>Step 3: Register Swamp in <code>src/App.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div>
+<pre class="sourceCode jsx instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span>import Overworld from './pages/Overworld.jsx'</span>
+<span>import Forest from './pages/Forest.jsx'</span>
+<span class="added-line">import Swamp from './pages/Swamp.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span>  swamp: Swamp,</span>
+<span>}</span>
+<span class="added-line"></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<p>Register a component in the same goal that creates it. The Forest link can now render Swamp immediately.</p>
+<h3 id="assess--testing-phase-7">Assess — Testing Phase</h3>
+<p>Travel Home → Intro → Overworld → Forest → Swamp. Choose “Search outside the hut.” The death screen should replace the Swamp UI without direct DOM manipulation. Choose Game Over, start again, and confirm Swamp returns to its initial local state.</p>
+<hr/>
+<h2 id="goal-8-update-shared-state-in-the-hut">Goal 8: Update Shared
+State in the Hut</h2>
+<h3 id="approach--design-phase-8">Approach — Design Phase</h3>
+<p>Opening the hut changes two kinds of state:</p>
+<ul>
+<li><code>open</code> and <code>message</code> matter only while
+rendering the Hut.</li>
+<li><code>player.keys</code> belongs to the whole game and must remain
+changed after leaving.</li>
+</ul>
+<p>This is the difference between local and shared state.</p>
+<p><strong>Design:</strong> One door event affects two state scopes. Local
+state controls the current door image and feedback; Context consumes a key so
+the inventory change survives navigation. The handler reads current state,
+chooses locked, unlock, or enter behavior, and React renders the result. Hut
+Interior is intentionally added in the next goal.</p>
+<h3 id="apply--implementation-phase-8">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 adds a Hut scene
+whose event handler coordinates local feedback with persistent key
+consumption; Step 2 registers it so the Swamp's hut choice no longer points to
+an unavailable page.</p>
+<p><strong>Step 1: Create <code>src/pages/Hut.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb28"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import { useState } from 'react'
+import { useGame } from '../GameContext.jsx'
+import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function Hut() {
+  const { player, updatePlayer, goTo } = useGame()
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState('')
+
+  function useDoor() {
+    if (open) {
+      goTo('hut-inside')
+    } else if (player.keys &gt; 0) {
+      updatePlayer({ keys: player.keys - 1 })
+      setOpen(true)
+      setMessage('The door unlocked, but the key broke apart.')
+    } else {
+      setMessage('The door is locked.')
+    }
+  }
+
+  return (
+    &lt;GamePage title="Witch's Hut"&gt;
+      &lt;button className="image-button" onClick={useDoor}&gt;
+        &lt;img
+          src={open ? '/assets/Open-Door.gif' : '/assets/Locked-Door.gif'}
+          width="240"
+          alt={open ? 'Open door' : 'Locked door'}
+        /&gt;
+      &lt;/button&gt;
+      &lt;p&gt;{message}&lt;/p&gt;
+      &lt;ActionLink to="swamp"&gt;Exit&lt;/ActionLink&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p>The ternary operator
+<code>condition ? valueWhenTrue : valueWhenFalse</code> selects the door
+image and its alternative text. Updating three state values causes React
+to render the new image, message, and inventory.</p>
+<p><strong>Step 2: Register Hut in <code>src/App.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div><pre class="sourceCode jsx instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span>import Overworld from './pages/Overworld.jsx'</span>
+<span>import Forest from './pages/Forest.jsx'</span>
+<span>import Swamp from './pages/Swamp.jsx'</span>
+<span class="added-line">import Hut from './pages/Hut.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span>  swamp: Swamp,</span>
+<span>  hut: Hut,</span>
+<span>}</span>
+<span class="added-line"></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<h3 id="assess--testing-phase-8">Assess — Testing Phase</h3>
+<p>First visit the Hut with the normal starting value of zero keys and click the door; it should remain locked. Then temporarily set <code>startingPlayer.keys</code> to <code>1</code>, restart the game, return to the Hut, and click the door once. Confirm the key decreases from 1 to 0, the image changes to the open door, and the unlock message appears. Do not click the open door yet because Hut Interior is added in the next goal. Restore <code>keys: 0</code> after the test.</p>
+<hr/>
+<h2 id="goal-9-render-video-in-the-hut-interior">Goal 9: Render Video in
+the Hut Interior</h2>
+<h3 id="approach--design-phase-9">Approach — Design Phase</h3>
+<p>Most standard HTML media attributes work in JSX. Boolean attributes
+such as <code>autoPlay</code>, <code>muted</code>, and <code>loop</code>
+are included without string values. JSX uses camelCase for
+<code>autoPlay</code>.</p>
+<p><strong>Design:</strong> Treat media as declarative scene content. The
+component returns an image, text, and video; the browser handles playback from
+JSX attributes while React controls when the scene exists. Registering
+<code>hut-inside</code> completes the destination requested by Hut, and
+<code>GamePage</code> keeps shared inventory visible.</p>
+<h3 id="apply--implementation-phase-9">Apply — Implementation Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 creates the
+previously deferred interior scene and its video content; Step 2 registers the
+hyphenated page key so a second click on an unlocked Hut door can render that
+scene.</p>
+<p><strong>Step 1: Create <code>src/pages/HutInside.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb29"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function HutInside() {
+  return (
+    &lt;GamePage title="Witch's Hut"&gt;
+      &lt;img src="/assets/witchhut-inside.png" width="480" alt="Inside the witch's hut" /&gt;
+      &lt;p&gt;You step into the hut and see a magical tome on the desk. You walk toward the book and look at it.&lt;/p&gt;
+      &lt;video src="/assets/Runic-Video.mp4" autoPlay muted loop width="480" /&gt;
+      &lt;p&gt;It's opened to a magical spell, and the glyphs glow in sequence. What could it mean?&lt;/p&gt;
+      &lt;ActionLink to="hut"&gt;Exit&lt;/ActionLink&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p><strong>What this adds:</strong> Hut Interior is a normal page component,
+so media participates in the same declarative render tree as headings,
+inventory, and links. Root-relative media URLs resolve from
+<code>public/assets</code> in development and production.</p>
+<p><strong>Step 2: Register Hut Interior in <code>src/App.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div><pre class="sourceCode jsx instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span>import Overworld from './pages/Overworld.jsx'</span>
+<span>import Forest from './pages/Forest.jsx'</span>
+<span>import Swamp from './pages/Swamp.jsx'</span>
+<span>import Hut from './pages/Hut.jsx'</span>
+<span class="added-line">import HutInside from './pages/HutInside.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span>  swamp: Swamp,</span>
+<span>  hut: Hut,</span>
+<span>  'hut-inside': HutInside,</span>
+<span>}</span>
+<span class="added-line"></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<h3 id="assess--testing-phase-9">Assess — Testing Phase</h3>
+<p>Temporarily start with one key, restart, travel to the Hut, click once to unlock it, and click the open door again. Hut Interior should render, the video should autoplay silently and loop, and the shared inventory should appear below the scene without an iframe. Exit back to the Hut, then restore the starting key value to zero.</p>
+<hr/>
+<h2 id="goal-10-update-shared-state-in-the-shoppe">Goal 10: Update Shared State in the Shoppe</h2>
+<h3>Approach — Design Phase</h3>
+<p>The Shoppe is the first scene that calculates new shared values from the existing player state. React event handlers replace the original inline functions and URL query-string updates. This goal focuses on one predictable state transaction at a time before combat adds local enemy state in the next goal.</p>
+<p><strong>Design:</strong> Keep purchase policy inside Shoppe and inventory
+storage inside Context. Each button supplies a cost and partial change to one
+shared handler. The flow is click → validate current gold → update Context →
+re-render Shoppe and Inventory. Unaffordable purchases cause no state
+update.</p>
+<h3 id="apply--shoppe">Apply — Shoppe</h3>
+<p><strong>How these steps extend the app:</strong> First create the Shoppe
+and its reusable purchase transaction; then register it so Overworld's
+existing Shoppe link reaches the new Context-updating scene.</p>
+<p>Create <code>src/pages/Shoppe.jsx</code>:</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb31"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import { useGame } from '../GameContext.jsx'
+import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function Shoppe() {
+  const { player, updatePlayer } = useGame()
+
+  function buy(cost, changes) {
+    if (player.gp &gt;= cost) {
+      updatePlayer({ gp: player.gp - cost, ...changes })
+    }
+  }
+
+  return (
+    &lt;GamePage title="Shoppe"&gt;
+      &lt;img src="/assets/shop.gif" width="480" alt="Shopkeeper" /&gt;
+      &lt;h4&gt;What can I get you?&lt;/h4&gt;
+      &lt;button onClick={() =&gt; buy(1, { hp: player.hp + 1 })}&gt;Health 💜&lt;br /&gt;&lt;i&gt;1 gp&lt;/i&gt;&lt;/button&gt;
+      &lt;button onClick={() =&gt; buy(5, { ap: player.ap + 1 })}&gt;Attack 🗡&lt;br /&gt;&lt;i&gt;5 gp&lt;/i&gt;&lt;/button&gt;
+      &lt;button onClick={() =&gt; buy(10, { keys: player.keys + 1 })}&gt;Key 🔑&lt;br /&gt;&lt;i&gt;10 gp&lt;/i&gt;&lt;/button&gt;
+      &lt;ActionLink to="overworld"&gt;Exit&lt;/ActionLink&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p>One <code>buy</code> function replaces three similar functions. This
+is a small example of passing different arguments to reuse logic.</p>
+<h3>Apply — Register the Shoppe</h3>
+<p>Import the component and add it to the existing page map before testing:</p>
+<p><strong>App impact:</strong> Registration connects the already-rendered
+Overworld link to Shoppe. Without the import and page-map entry, the purchase
+logic exists in a file but cannot become visible.</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div><pre class="instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span>import Overworld from './pages/Overworld.jsx'</span>
+<span>import Forest from './pages/Forest.jsx'</span>
+<span>import Swamp from './pages/Swamp.jsx'</span>
+<span>import Hut from './pages/Hut.jsx'</span>
+<span>import HutInside from './pages/HutInside.jsx'</span>
+<span class="added-line">import Shoppe from './pages/Shoppe.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span>  swamp: Swamp,</span>
+<span>  hut: Hut,</span>
+<span>  'hut-inside': HutInside,</span>
+<span>  shoppe: Shoppe,</span>
+<span>}</span>
+<span class="added-line"></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<h3>Assess — Testing Phase</h3>
+<ul><li>Accept the Intro quest, travel from Overworld to Shoppe, and confirm the scene renders without loading another HTML document.</li><li>With the 5-gold quest deposit, buy Health once and confirm gold decreases by 1 while health increases by 1.</li><li>Return Home and click Start to reset gold to 0. Accept the quest again, return to the Shoppe, buy one Attack upgrade, and confirm all 5 deposited gold is consumed while attack increases by 1.</li><li>Attempt another purchase without enough gold; no inventory value should change.</li><li>Temporarily set <code>startingPlayer.gp</code> to <code>15</code>, restart, accept the 5-gold deposit, and verify that the resulting 20 gold can test Health, Attack, and Key purchases. Restore <code>gp: 0</code> afterward.</li></ul>
+<hr/>
+<h2 id="goal-11-combine-local-and-shared-state-in-goblin-combat">Goal 11: Combine Local and Shared State in Goblin Combat</h2>
+<h3>Approach — Design Phase</h3>
+<p>The Goblin scene combines two state scopes. The player's health, attack, and gold belong to shared Context because other scenes use them. The goblin's health and battle message belong only to this encounter, so they remain local component state. This is more complex than the Shoppe because one event can update both scopes and select among combat, victory, and game-over interfaces.</p>
+<p><strong>Design:</strong> Derive the controls from state instead of hiding
+DOM elements manually. An attack calculates enemy health first, awards shared
+gold on victory, or applies shared player damage when the goblin survives.
+The resulting <code>won</code> and <code>dead</code> values select one control
+set. Returning on victory enforces the player-attacks-first rule.</p>
+<h3 id="apply--goblin">Apply — Goblin</h3>
+<p><strong>How these steps extend the app:</strong> First create the encounter
+that coordinates local enemy state with shared player state; then register it
+so Forest's Hills branch reaches combat instead of an unavailable page.</p>
+<p>Create <code>src/pages/Goblin.jsx</code>. The player's HP and gold are shared
+state; the goblin's HP and battle message are local state.</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb32"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import { useState } from 'react'
+import { useGame } from '../GameContext.jsx'
+import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function Goblin() {
+  const { player, updatePlayer } = useGame()
+  const [goblinHP, setGoblinHP] = useState(3)
+  const [message, setMessage] = useState("Goblin ambush! You're threatened by a goblin!")
+
+  const won = goblinHP &lt;= 0
+  const dead = player.hp &lt;= 0
+
+  function attack() {
+    const nextGoblinHP = goblinHP - player.ap
+    setGoblinHP(nextGoblinHP)
+
+    if (nextGoblinHP &lt;= 0) {
+      updatePlayer({ gp: player.gp + 3 })
+      setMessage('You defeated the goblin and find 3 gold!')
+      return
+    }
+
+    const nextHP = player.hp - 2
+    updatePlayer({ hp: nextHP })
+
+    if (nextHP &lt;= 0) {
+      setMessage('You Died.')
+      return
+    }
+
+    setMessage(`You hit for ${player.ap} damage, it has ${nextGoblinHP} HP left. You take 2 damage.`)
+  }
+
+  return (
+    &lt;GamePage title="Hills"&gt;
+      &lt;img src={won ? '/assets/treasure.gif' : '/assets/goblin.gif'} width="480" alt={won ? 'Treasure' : 'Goblin'} /&gt;
+      &lt;p&gt;{message}&lt;/p&gt;
+      {dead ? (
+        &lt;ActionLink to="home"&gt;Game Over&lt;/ActionLink&gt;
+      ) : won ? (
+        &lt;ActionLink to="forest"&gt;Go back&lt;/ActionLink&gt;
+      ) : (
+        &lt;&gt;&lt;button onClick={attack}&gt;Fight&lt;/button&gt; &lt;ActionLink to="forest"&gt;Retreat&lt;/ActionLink&gt;&lt;/&gt;
+      )}
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p>The player attacks first. If that attack defeats the goblin, the
+function awards gold and returns before the goblin can retaliate. This
+matches the combat progression described by the original HTML lab and
+makes repeated battles useful for earning gold. The nested ternary
+renders one of three sets of controls: game over, victory, or
+combat.</p>
+<h3>Apply — Register the Goblin</h3>
+<p>Import the component and add it to the page map before testing:</p>
+<p><strong>App impact:</strong> The registry entry completes the Forest →
+Goblin route. It also ensures leaving and revisiting combat unmounts and
+recreates Goblin's local encounter state while preserving Context inventory.</p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div><pre class="instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span>import Overworld from './pages/Overworld.jsx'</span>
+<span>import Forest from './pages/Forest.jsx'</span>
+<span>import Swamp from './pages/Swamp.jsx'</span>
+<span>import Hut from './pages/Hut.jsx'</span>
+<span>import HutInside from './pages/HutInside.jsx'</span>
+<span>import Shoppe from './pages/Shoppe.jsx'</span>
+<span class="added-line">import Goblin from './pages/Goblin.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span>  swamp: Swamp,</span>
+<span>  hut: Hut,</span>
+<span>  'hut-inside': HutInside,</span>
+<span>  shoppe: Shoppe,</span>
+<span>  goblin: Goblin,</span>
+<span>}</span>
+<span class="added-line"></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<h3>Assess — Testing Phase</h3>
+<ul><li>Travel from Overworld to Forest and then to Goblin. Confirm Retreat returns to Forest while preserving the current player inventory.</li><li>Temporarily use hp: 10 and ap: 3, restart, and verify one attack defeats the goblin, awards 3 gold, changes the image, and stops further combat.</li><li>Temporarily use hp: 1 and ap: 1, restart, and verify the goblin retaliation reduces health to zero and displays Game Over.</li><li>Restore the normal starting values, buy one Attack upgrade in the Shoppe, then fight repeatedly. Confirm shared health and gold remain updated after leaving the encounter.</li><li>Confirm the fight controls disappear after either victory or death.</li></ul>
+<hr/>
+<h2 id="goal-12-use-a-controlled-form-and-reach-the-dragon">Goal 12: Use a Controlled Form and Reach the Dragon</h2>
+<h3 id="approach--design-phase-10">Approach — Design Phase</h3>
+<p>The HTML lab reads <code>inputText.value</code> from the DOM. A
+controlled React input stores its value in state. The input displays
+that state, and <code>onChange</code> updates it after every
+keystroke.</p>
+<p><strong>Design:</strong> Build the success destination before the form
+that selects it. Dungeon owns temporary input and death state; Context owns
+page navigation. Form submission prevents a document reload and either
+selects Dragon or renders a death screen. Using <code>onSubmit</code> supports
+both clicking Submit and pressing Enter.</p>
+<h3 id="apply--implementation-phase-10">Apply — Implementation
+Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 creates the
+successful Dragon destination, Step 2 creates the controlled Dungeon form and
+its failure state, and Step 3 registers both components so every Dungeon
+submission resolves to an existing scene.</p>
+<p><strong>Step 1: Create the successful destination,
+<code>src/pages/Dragon.jsx</code>.</strong> Dungeon navigation is only
+testable when its destination already exists.</p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb33"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+
+export default function Dragon() {
+  return (
+    &lt;GamePage title="Dragon's Lair" showInventory={false}&gt;
+      &lt;img src="/assets/dragon-fire.gif" width="480" alt="Red dragon" /&gt;
+      &lt;p&gt;You step into the dungeon to find a Red Dragon. It roars and breathes fire toward you. You draw your sword.&lt;/p&gt;
+      &lt;h4&gt;To be continued...&lt;/h4&gt;
+      &lt;ActionLink to="home"&gt;Start Over&lt;/ActionLink&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p><strong>What this adds:</strong> Dragon is the successful terminal scene.
+Passing <code>showInventory={false}</code> demonstrates that a reusable
+component's default behavior can be overridden with a prop without creating a
+second page-shell component.</p>
+<p><strong>Step 2: Create <code>src/pages/Dungeon.jsx</code>.</strong></p>
+<div class="code-label create-label">CREATE FILE — use the complete listing</div><div class="sourceCode instruction-code code-create" id="cb30"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact">import { useState } from 'react'
+import { useGame } from '../GameContext.jsx'
+import GamePage from '../components/GamePage.jsx'
+import ActionLink from '../components/ActionLink.jsx'
+import DeathScreen from '../components/DeathScreen.jsx'
+
+export default function Dungeon() {
+  const [word, setWord] = useState('')
+  const [dead, setDead] = useState(false)
+  const { goTo } = useGame()
+
+  if (dead) {
+    return (
+      &lt;DeathScreen image="/assets/death-spell.gif"&gt;
+        You misspoke the magic word and your soul is ripped from your body!
+      &lt;/DeathScreen&gt;
+    )
+  }
+
+  function submit(event) {
+    event.preventDefault()
+    word === 'open' ? goTo('dragon') : setDead(true)
+  }
+
+  return (
+    &lt;GamePage title="Dungeon Entrance"&gt;
+      &lt;p&gt;There is a magical seal preventing you from entering the dungeon. You must dispel it.&lt;/p&gt;
+      &lt;img src="/assets/magic-seal.gif" width="480" alt="Magical seal" /&gt;
+      &lt;form onSubmit={submit}&gt;
+        &lt;label htmlFor="magic-word"&gt;Enter the magic word: &lt;/label&gt;
+        &lt;input
+          id="magic-word"
+          value={word}
+          onChange={(event) =&gt; setWord(event.target.value)}
+        /&gt;
+        &lt;button type="submit"&gt;Submit&lt;/button&gt;
+      &lt;/form&gt;
+      &lt;ActionLink to="overworld"&gt;Exit&lt;/ActionLink&gt;
+    &lt;/GamePage&gt;
+  )
+}</code></pre></div>
+<p>JSX uses <code>htmlFor</code> instead of the HTML <code>for</code>
+attribute. Handling the form's <code>onSubmit</code> supports both
+clicking Submit and pressing Enter.</p>
+<p><strong>Step 3: Register Dungeon and Dragon in <code>App.jsx</code>.</strong></p>
+<div class="code-label add-label">PATCH EXISTING FILE — <code>src/App.jsx</code> — complete file shown; new or changed lines are highlighted</div><pre class="sourceCode jsx instruction-code code-add"><code><span>import { useGame } from './GameContext.jsx'</span>
+<span>import Home from './pages/Home.jsx'</span>
+<span>import Intro from './pages/Intro.jsx'</span>
+<span>import Overworld from './pages/Overworld.jsx'</span>
+<span>import Forest from './pages/Forest.jsx'</span>
+<span>import Swamp from './pages/Swamp.jsx'</span>
+<span>import Hut from './pages/Hut.jsx'</span>
+<span>import HutInside from './pages/HutInside.jsx'</span>
+<span>import Shoppe from './pages/Shoppe.jsx'</span>
+<span>import Goblin from './pages/Goblin.jsx'</span>
+<span class="added-line">import Dungeon from './pages/Dungeon.jsx'</span>
+<span class="added-line">import Dragon from './pages/Dragon.jsx'</span>
+<span></span>
+<span>const pages = {</span>
+<span>  home: Home,</span>
+<span>  intro: Intro,</span>
+<span>  overworld: Overworld,</span>
+<span>  forest: Forest,</span>
+<span>  swamp: Swamp,</span>
+<span>  hut: Hut,</span>
+<span>  'hut-inside': HutInside,</span>
+<span>  shoppe: Shoppe,</span>
+<span>  goblin: Goblin,</span>
+<span>  dungeon: Dungeon,</span>
+<span class="added-line">  dragon: Dragon,</span>
+<span class="added-line">}</span>
+<span></span>
+<span>export default function App() {</span>
+<span>  const { page } = useGame()</span>
+<span>  const Page = pages[page] ?? Home</span>
+<span></span>
+<span>  return &lt;Page /&gt;</span>
+<span>}</span>
+</code></pre>
+<h3 id="assess--testing-phase-10">Assess — Testing Phase</h3>
+<p>Travel from Overworld to Dungeon. Type open and submit; Dragon should render as the completed success destination. Choose Start Over and confirm the Home scene returns. Restart, return to Dungeon, and submit any other word; the death screen should appear. Also verify that pressing Enter submits the controlled form and that the input always reflects the current React state.</p>
+<hr/>
+<hr/>
+<h2 id="end-complete-test-and-build-the-app">End: Complete, Test, and Build the App</h2>
+<h3 id="approach--design-phase-12">Approach — Design Phase</h3>
+<p>Every page has already been created, registered, and assessed in the goal that introduced it. This final goal performs an end-to-end regression test, confirms the final page map, and creates a production build.</p>
+<p><strong>Design:</strong> Separate development confidence from deployment
+confidence. Reviewing the map checks reachability, regression testing checks
+state across component boundaries, and <code>vite build</code> checks the
+complete module graph and public media. The generated <code>dist</code>
+folder is build output, never source.</p>
+<h3 id="apply--implementation-phase-12">Apply — Implementation
+Phase</h3>
+<p><strong>How these steps extend the app:</strong> Step 1 verifies that every
+story destination is reachable through the final registry; Step 2 asks Vite
+to transform and package the same source and public assets for deployment.
+Neither step introduces new story behavior—the goal is release confidence.</p>
+<p><strong>Step 1: Review the completed page map in <code>src/App.jsx</code>.</strong> At this point, the map should already contain every page added incrementally in Goals 6–12:</p>
+<div class="code-label review-label">COMPLETED REFERENCE — compare your file</div><div class="sourceCode instruction-code code-review" id="cb34"><pre class="sourceCode jsx"><code class="sourceCode javascriptreact"><span class="review-line" id="cb34-1"><a aria-hidden="true" href="#cb34-1" tabindex="-1"></a><span class="kw">const</span> pages <span class="op">=</span> {</span>
+<span class="review-line" id="cb34-2"><a aria-hidden="true" href="#cb34-2" tabindex="-1"></a>  <span class="dt">home</span><span class="op">:</span> Home<span class="op">,</span></span>
+<span class="review-line" id="cb34-3"><a aria-hidden="true" href="#cb34-3" tabindex="-1"></a>  <span class="dt">intro</span><span class="op">:</span> Intro<span class="op">,</span></span>
+<span class="review-line" id="cb34-4"><a aria-hidden="true" href="#cb34-4" tabindex="-1"></a>  <span class="dt">overworld</span><span class="op">:</span> Overworld<span class="op">,</span></span>
+<span class="review-line" id="cb34-5"><a aria-hidden="true" href="#cb34-5" tabindex="-1"></a>  <span class="dt">forest</span><span class="op">:</span> Forest<span class="op">,</span></span>
+<span class="review-line" id="cb34-6"><a aria-hidden="true" href="#cb34-6" tabindex="-1"></a>  <span class="dt">swamp</span><span class="op">:</span> Swamp<span class="op">,</span></span>
+<span class="review-line" id="cb34-7"><a aria-hidden="true" href="#cb34-7" tabindex="-1"></a>  <span class="dt">hut</span><span class="op">:</span> Hut<span class="op">,</span></span>
+<span class="review-line" id="cb34-8"><a aria-hidden="true" href="#cb34-8" tabindex="-1"></a>  <span class="st">'hut-inside'</span><span class="op">:</span> HutInside<span class="op">,</span></span>
+<span class="review-line" id="cb34-9"><a aria-hidden="true" href="#cb34-9" tabindex="-1"></a>  <span class="dt">dungeon</span><span class="op">:</span> Dungeon<span class="op">,</span></span>
+<span class="review-line" id="cb34-10"><a aria-hidden="true" href="#cb34-10" tabindex="-1"></a>  <span class="dt">dragon</span><span class="op">:</span> Dragon<span class="op">,</span></span>
+<span class="review-line" id="cb34-11"><a aria-hidden="true" href="#cb34-11" tabindex="-1"></a>  <span class="dt">shoppe</span><span class="op">:</span> Shoppe<span class="op">,</span></span>
+<span class="review-line" id="cb34-12"><a aria-hidden="true" href="#cb34-12" tabindex="-1"></a>  <span class="dt">goblin</span><span class="op">:</span> Goblin<span class="op">,</span></span>
+<span class="review-line" id="cb34-13"><a aria-hidden="true" href="#cb34-13" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Step 2: Build the production app.</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" href="#cb36-1" tabindex="-1"></a><span class="ex">npm</span> run build</span></code></pre></div>
+<p>Vite writes the deployable site to <code>dist/</code>. Do not edit
+files inside <code>dist</code>; they are generated from the source
+files.</p>
+<h3 id="assess--testing-phase-12">Assess — Testing Phase</h3>
+<p>Test each behavior:</p>
+<ul>
+<li>Start resets the player to 0 gold, 3 health, 1 attack, and 0 keys;
+accepting the Intro quest then increases gold to 5 before Overworld
+renders.</li>
+<li>Every Overworld and Forest choice opens the expected scene.</li>
+<li>Inventory remains consistent between scenes.</li>
+<li>The alligator and incorrect magic word display death screens.</li>
+<li>Shop purchases require enough gold and update inventory.</li>
+<li>Goblin attacks update both combat text and player health.</li>
+<li>A key opens the hut and is consumed.</li>
+<li>The hut video autoplays and loops.</li>
+<li>The word <code>open</code> reaches the Dragon.</li>
+<li><code>npm run build</code> finishes without errors.</li>
+</ul>
+<hr/>
+<h2 id="concluding-notes">Concluding Notes</h2>
+<p>The original and refactored games produce nearly the same experience,
+but their data flow is different. The multi-page version makes the
+browser responsible for document navigation and manually serializes
+state into URLs. The React version keeps the application mounted,
+represents scenes as components, and lets state determine what React
+renders.</p>
+<p>React's central idea is:</p>
+<pre class="text"><code>UI = a function of state</code></pre>
+<p>Instead of finding an element and changing it, update state and
+describe the UI that should exist for that state.</p>
+<h3 id="submission">Submission</h3>
+<p>Submit at least:</p>
+<pre class="text"><code>index.html
+package.json
+package-lock.json
+vite.config.js
+public/
+src/</code></pre>
+<p>Do not submit <code>node_modules/</code> or <code>dist/</code> unless
+your instructor requests them.</p>
+<h3 id="homework-extend-your-interactive-story">Homework: Extend Your
+Interactive Story</h3>
+<p>Add one new scene component and one new player value. Examples
+include armor, a potion, a collected spell, or a defeated-enemy flag.
+Decide whether each new value is local to one component or must be
+shared through <code>GameContext</code>.</p>
+<hr/>
+<h2 id="appendix-react-concepts">Appendix: React Concepts</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Syntax</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Function component</td>
+<td><code>function Forest() { return (...) }</code></td>
+<td>Defines reusable UI</td>
+</tr>
+<tr class="even">
+<td>JSX element</td>
+<td><code>&lt;Inventory /&gt;</code></td>
+<td>Renders a component</td>
+</tr>
+<tr class="odd">
+<td>Prop</td>
+<td><code>&lt;GamePage title="Forest"&gt;</code></td>
+<td>Passes data from parent to child</td>
+</tr>
+<tr class="even">
+<td>Children prop</td>
+<td><code>{children}</code></td>
+<td>Renders nested JSX supplied by a parent</td>
+</tr>
+<tr class="odd">
+<td>State</td>
+<td><code>useState(initialValue)</code></td>
+<td>Remembers a changing value</td>
+</tr>
+<tr class="even">
+<td>Context</td>
+<td><code>createContext()</code></td>
+<td>Makes shared values available below a provider</td>
+</tr>
+<tr class="odd">
+<td>Context Hook</td>
+<td><code>useContext(GameContext)</code></td>
+<td>Reads the nearest provider value</td>
+</tr>
+<tr class="even">
+<td>Event handler</td>
+<td><code>onClick={attack}</code></td>
+<td>Runs a function after a user event</td>
+</tr>
+<tr class="odd">
+<td>Conditional render</td>
+<td><code>{won ? &lt;Treasure /&gt; : &lt;Goblin /&gt;}</code></td>
+<td>Selects UI from state</td>
+</tr>
+<tr class="even">
+<td>JavaScript in JSX</td>
+<td><code>{player.hp}</code></td>
+<td>Inserts an expression into rendered UI</td>
+</tr>
+<tr class="odd">
+<td>Fragment</td>
+<td><code>&lt;&gt;...&lt;/&gt;</code></td>
+<td>Groups siblings without another DOM element</td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix-html-to-jsx">Appendix: HTML to JSX</h2>
+<table>
+<thead>
+<tr class="header">
+<th>HTML</th>
+<th>JSX</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>class="inventory"</code></td>
+<td><code>className="inventory"</code></td>
+<td><code>class</code> is a JavaScript keyword</td>
+</tr>
+<tr class="even">
+<td><code>for="magic-word"</code></td>
+<td><code>htmlFor="magic-word"</code></td>
+<td>Associates a label with an input</td>
+</tr>
+<tr class="odd">
+<td><code>onclick="attack()"</code></td>
+<td><code>onClick={attack}</code></td>
+<td>JSX receives a function</td>
+</tr>
+<tr class="even">
+<td><code>autoplay</code></td>
+<td><code>autoPlay</code></td>
+<td>DOM property names use camelCase</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;img src="..."&gt;</code></td>
+<td><code>&lt;img src="..." /&gt;</code></td>
+<td>JSX elements must close</td>
+</tr>
+<tr class="even">
+<td><code>&lt;hr&gt;</code></td>
+<td><code>&lt;hr /&gt;</code></td>
+<td>JSX elements must close</td>
+</tr>
+<tr class="odd">
+<td><code>style="color: red"</code></td>
+<td><code>style={{ color: 'red' }}</code></td>
+<td>Inline styles use an object</td>
+</tr>
+<tr class="even">
+<td><code>document.body.innerHTML = ...</code></td>
+<td>Conditional rendering</td>
+<td>React owns rendered DOM</td>
+</tr>
+<tr class="odd">
+<td><code>element.innerText = value</code></td>
+<td><code>{value}</code></td>
+<td>React renders current data</td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix-state-placement-guide">Appendix: State Placement
+Guide</h2>
+<p>Ask, “Which components need this value?”</p>
+<table>
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>Placement</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current scene</td>
+<td>Shared Context state</td>
+<td>Navigation affects the entire app</td>
+</tr>
+<tr class="even">
+<td>Gold, health, attack, keys</td>
+<td>Shared Context state</td>
+<td>Many scenes read or update them</td>
+</tr>
+<tr class="odd">
+<td>Dungeon input text</td>
+<td>Local Dungeon state</td>
+<td>No other scene needs the typed value</td>
+</tr>
+<tr class="even">
+<td>Goblin HP</td>
+<td>Local Goblin state</td>
+<td>It belongs to one encounter</td>
+</tr>
+<tr class="odd">
+<td>Hut door open/message</td>
+<td>Local Hut state</td>
+<td>It only controls the Hut UI</td>
+</tr>
+<tr class="even">
+<td>Swamp death choice</td>
+<td>Local Swamp state</td>
+<td>It only selects the Swamp result</td>
+</tr>
+</tbody>
+</table>
+<script>
+  // Patch listings use one span per line so added lines can keep their green
+  // background. Apply lightweight, local JSX highlighting without replacing
+  // those line spans or requiring a network-loaded syntax library.
+  (() => {
+    const escapeHtml = (value) => value
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+
+    const tokens = /(\/\/.*$|\/\*.*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|<\/?[A-Za-z][^>]*>|\b(?:import|from|export|default|function|return|const|let|if|else|true|false|null|new)\b|\b\d+\b|=>|\.\.\.|&&|\?\?|\?\.|[{}()[\]=:+\-*/<>])/gm
+
+    function tokenClass(token) {
+      if (token.startsWith('//') || token.startsWith('/*')) return 'patch-syntax-comment'
+      if (/^["'`]/.test(token)) return 'patch-syntax-string'
+      if (token.startsWith('<')) return 'patch-syntax-jsx'
+      if (/^\d+$/.test(token)) return 'patch-syntax-number'
+      if (/^(?:import|from|export|default|function|return|const|let|if|else|true|false|null|new)$/.test(token)) {
+        return 'patch-syntax-keyword'
+      }
+      return 'patch-syntax-operator'
+    }
+
+    document.querySelectorAll('.instruction-code.code-add > code > span').forEach((line) => {
+      let cursor = 0
+      let highlighted = ''
+      const source = line.textContent
+
+      for (const match of source.matchAll(tokens)) {
+        highlighted += escapeHtml(source.slice(cursor, match.index))
+        highlighted += `<span class="${tokenClass(match[0])}">${escapeHtml(match[0])}</span>`
+        cursor = match.index + match[0].length
+      }
+
+      highlighted += escapeHtml(source.slice(cursor))
+      line.innerHTML = highlighted
+    })
+  })()
+</script>
+</body>
+</html>
